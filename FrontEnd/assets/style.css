@@ -146,6 +146,16 @@ li:hover {
 	border-radius: 60px;
 }
 
+.filter-btn-clicked{
+	min-width: 100px;
+	color:#FFFEF8;
+	background-color:#1D6154;
+	font-weight: 700;
+	border: #1D6154 solid 1px;
+	border-radius: 60px;
+
+}
+
 .gallery {
 	width: 100%;
 	display: grid;

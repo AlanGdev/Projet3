@@ -24,6 +24,7 @@ projets.forEach(projet=>{
     galleryClass.appendChild(figureBal)
     console.log(figureBal)
 })
+
  // Envoi d'un fetch pour récup. des différentes catégories
  const repCategories=await fetch ('http://localhost:5678/api/categories')
  const categories= await repCategories.json() //categories: tableau des catégories au format json
@@ -39,7 +40,7 @@ projets.forEach(projet=>{
 
  //Création du bouton Tous (toutes catégories)
  filtersClass.innerHTML=`
-    <button data-id="0" class="filter-btn">Tous</button>`
+    <button data-id="0" class="filter-btn-clicked">Tous</button>`
 
  // Pour chaque élément de categories:
  categories.forEach(categorie=>{
@@ -49,3 +50,32 @@ projets.forEach(projet=>{
     btn.classList.add("filter-btn")
     filtersClass.appendChild(btn)
  })
+
+ //On va rajouter un gestionnaire d'évenements sur les boutons, au click
+ //On selectionne tous les boutons
+ const filters=filtersClass.querySelectorAll("button")
+ console.log(filters)
+ //On lance une boucle forEach button
+filters.forEach(filter=>{
+    //on prend le bouton et on rajoute un gestionnaire d'évenement au click - On ouvre une fonction flêchée
+    filter.addEventListener("click",()=>{
+            //On va retirer la classe filter-btn-clicked du bouton cliqué antérieurement pour l'ajouter au nouveau bouton cliqué ensuite
+            //On vérifie donc (sur chaque bouton)si le bouton a la class "filter-btn-clicked" (pour pouvoir la retirer)
+            filters.forEach(button=>{
+                if (button.classList.contains("filter-btn-clicked")){
+                    console.log (`Le bouton ${button.dataset.id}est l'ancien bouton cliqué`)
+                    button.classList.remove("filter-btn-clicked")
+                    button.classList.add("filter-btn")
+                    console.log(`le bouton a desormais les classes: ${button.classList}`)
+                    }
+                })
+            console.log(`bouton ${filter.dataset.id} cliqué`)
+            filter.classList.add("filter-btn-clicked")
+            filter.classList.remove("filter-btn")
+        })
+
+    // On change la classe DU bouton en filter-btn-clicked
+
+    })
+
+
