@@ -1,7 +1,8 @@
 export function effacerContenuBalise(balise){
     balise.innerHTML=''
 }
-export function afficherProjets(projets,baliseAffichage){
+
+export function afficherProjets(projets,balise){
     //Pour chaque element du tableau:
     projets.forEach(item=>{
         // On crée une balise <figure>:
@@ -12,6 +13,7 @@ export function afficherProjets(projets,baliseAffichage){
             <figcaption>${item.title}</figcaption>
             `
         // On ajoute cette balise au contenu de la classe parente galleryClass
-        baliseAffichage.appendChild(figureBal)
+        balise.appendChild(figureBal)
     })
 }
+

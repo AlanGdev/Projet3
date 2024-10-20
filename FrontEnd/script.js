@@ -7,7 +7,7 @@ const projects=await respProjects.json() // projets: tableau des travaux au form
  // Envoi d'un fetch pour récup. des différentes catégories
  const respCategories=await fetch ('http://localhost:5678/api/categories')
  const categories= await respCategories.json() //categories: tableau des catégories au format json
-
+ 
 // Récupération de la class "gallery" dans la page HTML (C'est là que sont affichés les projets)
 let galleryClass=document.querySelector(".gallery")
 
@@ -30,7 +30,7 @@ fonction.afficherProjets(projects,galleryClass)
 
  // Pour chaque élément de categories:
  categories.forEach(categorie=>{
-    let btn=document.createElement("button") //On crée un élément button
+    const btn=document.createElement("button") //On crée un élément button
     btn.setAttribute("data-id",`${categorie.id}`) // on ajoute un attribut: data-id=categorie.id
     btn.innerText=`${categorie.name}` //on ajoute du texte: categorie.name
     btn.classList.add("filter-btn") //on ajoute une classe pour mise en forme du bouton (non cliqué)
@@ -75,7 +75,7 @@ filters.forEach(filter=>{
             })()// Les parenthèses de fin lancent la fonction définie à l'instant.
 
             fonction.effacerContenuBalise(galleryClass)// On efface le contenu du conteneur (class gallery)
-            
+
             fonction.afficherProjets(filteredProjects,galleryClass) // on ajoute le contenu des projets filtrés (ou non)
         })
     })
