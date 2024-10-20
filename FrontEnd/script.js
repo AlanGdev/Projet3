@@ -58,13 +58,21 @@ filters.forEach(filter=>{
             filter.classList.remove("filter-btn")
             // On enregistre dans une variable, le data-id du bouton, correspondant à la catégorie.
             let id=Number(filter.dataset.id)
-            let filteredProjects=[...projects] // On crée un nouveau tableau de projets égal au tableau de base (pour laisser le tableau de base intact)
-            if (id!=0){ // Si l'id est égal à l'ID d'une catégorie (0 équivalent à tous les projets dc non filtrés)
-                // Alors on filtre les projets suivant la catégorie:
-                filteredProjects=projects.filter((project)=>{ 
-                    return project.category.id===id // (Je joue directement sur la catégorie du projet, non sur la propriété categoryId => Plus de sécurité quant à la bonne catégorie)
-                })
-            }
+            // On crée la constante filteredProjects:
+            const filteredProjects=(()=>{
+                console.log("On est sur la construction de la constante filteredProjects")
+                if(id!=0){ // Si id != 0 (bouton Tous)
+                    console.log(id)
+                    return projects.filter((project)=>{
+                        return project.category.id===id
+                    })
+                }
+                else{
+                    console.log(id)
+                    return[...projects] // Si id=0, on a tous les projets
+                }
+
+            })()// Les parenthèses de fin lancent la fonction précédemment définie.
             fonction.effacerContenuBalise(galleryClass)// On efface le contenu du conteneur (class gallery)
             fonction.afficherProjets(filteredProjects,galleryClass) // on ajoute le contenu des projets filtrés (ou non)
         })
