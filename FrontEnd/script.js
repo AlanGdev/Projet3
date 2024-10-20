@@ -38,26 +38,27 @@ fonction.afficherProjets(projects,galleryClass)
  })
 
  //On va rajouter un gestionnaire d'évenements sur les boutons, au click
- //=>On selectionne tous les boutons
- const filters=filtersClass.querySelectorAll("button")
- //On lance une boucle forEach sur chaque boutton
+ const filters=filtersClass.querySelectorAll("button") //=>On selectionne tous les boutons
+ //On lance une boucle forEach sur chaque boutton:
 filters.forEach(filter=>{
-    //on prend le bouton et on rajoute le gestionnaire d'évenement au click - On ouvre une fonction flêchée
+    //on prend le bouton et on rajoute le gestionnaire d'évenement au click - On ouvre une fonction flêchée:
     filter.addEventListener("click",()=>{
             /*On va retirer la classe filter-btn-clicked du bouton cliqué antérieurement pour l'ajouter au nouveau bouton cliqué ensuite
-            //On vérifie donc chaque bouton pour enlevé la classe cliqué et tous les remettre comme 'non cliqués'*/
+            //On vérifie donc chaque bouton pour enlevé la classe cliqué si besoin et tous les remettre comme 'non cliqués'*/
             filters.forEach(button=>{
-                if (button.classList.contains("filter-btn-clicked")){ // Si le bouton est cliqué (classe filter-btn-clicked)
+                if (button.classList.contains("filter-btn-clicked")){ // Si le bouton est cliqué (classe filter-btn-clicked:
                     button.classList.remove("filter-btn-clicked") // On enlève la classe filter-btn-clicked (cliqué)
                     button.classList.add("filter-btn")// On ajoute la classe filter-btn (normal)
                     }
                 })
+
             // On va maintenant s'intéresser au bouton cliqué:
-            // Changement de classe du bouton cliqué (passage en filter-btn-clicked)
-            filter.classList.add("filter-btn-clicked")
+            filter.classList.add("filter-btn-clicked")// Changement de classe du bouton cliqué (passage en filter-btn-clicked)
             filter.classList.remove("filter-btn")
+
             // On enregistre dans une variable, le data-id du bouton, correspondant à la catégorie.
             let id=Number(filter.dataset.id)
+
             // On crée la constante filteredProjects:
             const filteredProjects=(()=>{
                 console.log("On est sur la construction de la constante filteredProjects")
@@ -71,9 +72,10 @@ filters.forEach(filter=>{
                     console.log(id)
                     return[...projects] // Si id=0, on a tous les projets
                 }
+            })()// Les parenthèses de fin lancent la fonction définie à l'instant.
 
-            })()// Les parenthèses de fin lancent la fonction précédemment définie.
             fonction.effacerContenuBalise(galleryClass)// On efface le contenu du conteneur (class gallery)
+            
             fonction.afficherProjets(filteredProjects,galleryClass) // on ajoute le contenu des projets filtrés (ou non)
         })
     })

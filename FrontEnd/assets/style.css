@@ -224,21 +224,31 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+.bg-footer{/**/
+	/*Cette class sert à mettre une couleur de fond sur toute la largeur de la page */
+	width: 100vw;
+    background-color:#ffffff;
+    position: absolute;
+    left:0;
+
+
+}
 footer{
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	background-color: #FFFFFF;
-	height:60px;
-	margin: auto;
+	max-width: 1140px;/* idem body*/
+	margin: auto;/* centrage sur .bg-footer*/
 }
 
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em;
-	font-weight:300;
+	font-weight:300;/* conformément à la maquette*/
 
+}
+
+#bg-footer{/*Footer page de connexion pour positionnement bas de page*/
+	position: absolute;
+	bottom: 0;
 }
 
 
