@@ -1,8 +1,9 @@
 export function effacerContenuBalise(balise){
-    balise.innerHTML=''
+    balise.innerHTML='' //Effacement de la balise passée en argument
 }
 
 export function afficherProjets(projets,baliseAffichage){
+    // Affichage des projets passés en argument dans la balise passée en argument:
     //Pour chaque element du tableau:
     projets.forEach(item=>{
         // On crée une balise <figure>:
@@ -18,18 +19,20 @@ export function afficherProjets(projets,baliseAffichage){
 }
 
 export function defineClassFilterBtn(btn,newClass){
+    // Effacement de la classe du bouton passé en argument et ajout de la classe passée en argument:
     btn.className="" // On efface les classes présentes sur le bouton
     btn.classList.add(newClass) // On lui rajoute la classe passée en argument de la fonction
 }
 
 export function createBtnFilterTous(classe){
-    // On crée le bouton dejà cliqué (filter-btn-clicked) - attribut data-id="Tous"
+    // création du bouton "Tous" dans la classe passée en argument - dejà cliqué (filter-btn-clicked) - attribut data-id="Tous":
     classe.innerHTML=`
     <button data-id="Tous" class="filter-btn-clicked">Tous</button>
     `
 }
 
 export function createBtnFilter(parent,categorie){
+    // Création d'un bouton filtre dans le parent passé en argument, avec la catégorie passée en argument:
     const btn=document.createElement("button") //On crée un élément button
     btn.setAttribute("data-id",`${categorie.id}`) // on ajoute un attribut: data-id=categorie.id
     btn.innerText=`${categorie.name}` //on ajoute du texte: categorie.name
@@ -38,11 +41,12 @@ export function createBtnFilter(parent,categorie){
 }
 
 export function addEventListenerButtonFilter(classeBoutons,projets,classeProjets){
+    // Ajout d'un gestionnaire d'évenements sur les boutons de la classe passée en argument (classeBoutons) pour trier les projets passés en argument (projets) et les afficher dans la classe passée en argument (classeProjets)
     const filters=classeBoutons.querySelectorAll("button") //On sélectionne tous les boutons de la classe
-    //On lance une boucle forEach pour chaque bouton auxquels on va ajouter un gestionnaire d'évènements
+    //On lance une boucle forEach pour chaque bouton auxquels on va ajouter un gestionnaire d'évènements:
     filters.forEach(filterbtn=>
         filterbtn.addEventListener("click",()=>{
-            //On repasse tous le bouton anciennement clicqué (filter-btn-clicked) en non cliqué (classe filter-btn):
+            //On repasse le bouton anciennement clicqué (filter-btn-clicked) en non cliqué (classe filter-btn):
             filters.forEach(filterbtn=>{
                 // Si le bouton est cliqué
                 if(filterbtn.classList.contains("filter-btn-clicked")){
@@ -56,7 +60,7 @@ export function addEventListenerButtonFilter(classeBoutons,projets,classeProjets
             let id=filterbtn.dataset.id
             // On crée la liste des projets filtrés:
             const filteredProjects=(()=>{
-                if(id!="Tous"){
+                if(id!=="Tous"){
                     return projets.filter((projet)=>{
                         return projet.category.id===Number(id)
                     })
