@@ -8,7 +8,7 @@ const projects=await respProjects.json() // projets: tableau des travaux au form
  const respCategories=await fetch ('http://localhost:5678/api/categories')
  const categories= await respCategories.json() //categories: tableau des catégories au format json
  
-// Récupération de la class "gallery" dans la page HTML (C'est là que sont affichés les projets)
+// Récupération du conteneur div class "gallery" dans la page HTML (C'est là que sont affichés les projets)
 let gallery=document.querySelector(".gallery")
 
 // Efface le contenu de gallery pour effacer les travaux en static via la focntion importée
@@ -17,7 +17,7 @@ fonction.effacerContenuBalise(gallery)
 // Affichage des projets via la fonction importée
 fonction.afficherProjets(projects,gallery)
 
- //Récupération de la class div class="filters" dans la page HTML (c'est là que sont affichés les filtres)
+ //Récupération du conteneur div class="filters" dans la page HTML (c'est là que sont affichés les filtres)
  let filtersClass=document.querySelector(".filters")
 
  //Création du bouton Tous (toutes catégories) avec de base la classe filter-btn-clicked (bouton clické) et le data-id="Tous"
@@ -27,8 +27,9 @@ fonction.createBtnFilterTous(filtersClass)
  categories.forEach(categorie=>{
     fonction.createBtnFilter(filtersClass,categorie)
  })
+/******** Par défaut, tous les projets sont affichés et le filtre "Tous" est cliqué ******/
 
- //On va rajouter un gestionnaire d'évenements sur les boutons, au click
+ //On rajoute un gestionnaire d'évenements sur les boutons, au click
  fonction.addEventListenerButtonFilter(filtersClass,projects,gallery)
 
 

@@ -17,7 +17,7 @@ export function afficherProjets(projets,baliseAffichage){
     })
 }
 
-export function switchClassFilterBtn(btn,newClass){
+export function defineClassFilterBtn(btn,newClass){
     btn.className="" // On efface les classes présentes sur le bouton
     btn.classList.add(newClass) // On lui rajoute la classe passée en argument de la fonction
 }
@@ -33,7 +33,7 @@ export function createBtnFilter(parent,categorie){
     const btn=document.createElement("button") //On crée un élément button
     btn.setAttribute("data-id",`${categorie.id}`) // on ajoute un attribut: data-id=categorie.id
     btn.innerText=`${categorie.name}` //on ajoute du texte: categorie.name
-    btn.classList.add("filter-btn") //on ajoute une classe pour mise en forme du bouton (non cliqué)
+    defineClassFilterBtn(btn,"filter-btn") // on définit une classe au bouton
     parent.appendChild(btn) // on ajoute le bouton créé à son parent ('filtersClass')
 }
 
@@ -47,11 +47,11 @@ export function addEventListenerButtonFilter(classeBoutons,projets,classeProjets
                 // Si le bouton est cliqué
                 if(filterbtn.classList.contains("filter-btn-clicked")){
                     //On le passe en non cliqué
-                    switchClassFilterBtn(filterbtn,"filter-btn")
+                    defineClassFilterBtn(filterbtn,"filter-btn")
                 }
             })
             //On passe la classe du bouton cliqué en "filter-btn-clicked"
-            switchClassFilterBtn(filterbtn,"filter-btn-clicked")
+            defineClassFilterBtn(filterbtn,"filter-btn-clicked")
             // On enregistre la catégorie correspondant au bouton dans la variable id
             let id=filterbtn.dataset.id
             // On crée la liste des projets filtrés:
