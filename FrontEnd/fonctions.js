@@ -4,24 +4,20 @@ export function effacerContenuBalise(balise){
 
 export function afficherProjets(projets,baliseAffichage){
     // Affichage des projets passés en argument dans la balise passée en argument:
-    //Pour chaque element du tableau:
     projets.forEach(item=>{
-        // On crée une balise <figure>:
         let figureBal=document.createElement('figure')
-        // On crée le code HTML de la balise:
         figureBal.innerHTML=`
             <img src=${item.imageUrl} alt=${item.title}>
             <figcaption>${item.title}</figcaption>
             `
-        // On ajoute cette balise au contenu de la classe parente galleryClass
         baliseAffichage.appendChild(figureBal)
     })
 }
 
 export function defineClassFilterBtn(btn,newClass){
     // Effacement de la classe du bouton passé en argument et ajout de la classe passée en argument:
-    btn.className="" // On efface les classes présentes sur le bouton
-    btn.classList.add(newClass) // On lui rajoute la classe passée en argument de la fonction
+    btn.className="" 
+    btn.classList.add(newClass)
 }
 
 export function createBtnFilterTous(classe){
@@ -33,24 +29,21 @@ export function createBtnFilterTous(classe){
 
 export function createBtnFilter(parent,categorie){
     // Création d'un bouton filtre dans le parent passé en argument, avec la catégorie passée en argument:
-    const btn=document.createElement("button") //On crée un élément button
-    btn.setAttribute("data-id",`${categorie.id}`) // on ajoute un attribut: data-id=categorie.id
-    btn.innerText=`${categorie.name}` //on ajoute du texte: categorie.name
-    defineClassFilterBtn(btn,"filter-btn") // on définit une classe au bouton
-    parent.appendChild(btn) // on ajoute le bouton créé à son parent ('filtersClass')
+    const btn=document.createElement("button") 
+    btn.setAttribute("data-id",`${categorie.id}`)
+    btn.innerText=`${categorie.name}`
+    defineClassFilterBtn(btn,"filter-btn")
+    parent.appendChild(btn)
 }
 
 export function addEventListenerButtonFilter(classeBoutons,projets,classeProjets){
     // Ajout d'un gestionnaire d'évenements sur les boutons de la classe passée en argument (classeBoutons) pour trier les projets passés en argument (projets) et les afficher dans la classe passée en argument (classeProjets)
-    const filters=classeBoutons.querySelectorAll("button") //On sélectionne tous les boutons de la classe
-    //On lance une boucle forEach pour chaque bouton auxquels on va ajouter un gestionnaire d'évènements:
+    const filters=classeBoutons.querySelectorAll("button")
     filters.forEach(filterbtn=>
         filterbtn.addEventListener("click",()=>{
             //On repasse le bouton anciennement clicqué (filter-btn-clicked) en non cliqué (classe filter-btn):
             filters.forEach(filterbtn=>{
-                // Si le bouton est cliqué
                 if(filterbtn.classList.contains("filter-btn-clicked")){
-                    //On le passe en non cliqué
                     defineClassFilterBtn(filterbtn,"filter-btn")
                 }
             })
@@ -66,12 +59,10 @@ export function addEventListenerButtonFilter(classeBoutons,projets,classeProjets
                     })
                 }
                 else{
-                    return[...projets] //si l'id="Tous", on renvoie une copie du tableau projets
+                    return[...projets]
                 }
-            })() // Les parenthèses de fin lancent la fonction
-            // On efface le contenu du conteneur des projets:
+            })()
             effacerContenuBalise(classeProjets)
-            // On affiche les projets filtrés:
             afficherProjets(filteredProjects,classeProjets)
         })
     )

@@ -251,4 +251,23 @@ footer nav ul {
 	bottom: 0;
 }
 
+.hidden{
+	display:none
+}
 
+.alert{
+	background-color: red;
+	color: white;
+	font-weight: 700;
+}
+
+a{
+	color: inherit;
+	text-decoration: none;
+}
+#edition-mode{
+	color: white;
+	background-color: black;
+	font-weight: 700;
+	text-align: center;
+}
