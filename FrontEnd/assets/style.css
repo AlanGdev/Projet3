@@ -297,7 +297,7 @@ a{
 	border: 0;
 	padding: 0;
 	background-color: #FFFEF8;
-	transition: opacity 300ms ease-out;
+	transition: opacity 300ms ease-out;  
 }
 #modifier i{
 	font-size: 15.5px;
@@ -309,3 +309,4 @@ a{
 .hidden{
 	display: none !important;
 }
+

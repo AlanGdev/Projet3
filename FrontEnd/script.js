@@ -17,6 +17,7 @@ const header=document.getElementById("header")
 const log=document.getElementById("log")
 const modifier=document.getElementById("modifier")
 const filters=document.getElementById("filters")
+const modale=document.getElementById("modale")
  
 const gallery=document.querySelector(".gallery") //Récup. du conteneur gallery pour affichage projets
 fonction.effacerContenuBalise(gallery)
@@ -46,6 +47,7 @@ else{
    modifier.classList.remove("hidden") // apparition "modifier"
    modifier.addEventListener("click",()=>{
       console.log("coucou")
+      fonction.modaleCreation(modale,projects)
    })
 
    filters.classList.add("hidden")

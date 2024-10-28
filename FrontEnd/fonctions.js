@@ -67,3 +67,21 @@ export function addEventListenerButtonFilter(classeBoutons,projets,classeProjets
         })
     )
 }
+
+export function modaleCreation(modale,projets){
+    //Création de la modale (Galerie Photo)
+    modale.classList.remove("hidden")
+    const content=modale.querySelector(".content")
+    effacerContenuBalise(content)
+    projets.forEach(projet=>{
+        console.log(projet)
+        const figure=document.createElement("figure")
+        figure.innerHTML=`
+        <img src=${projet.imageUrl} alt=${projet.title}>
+        <button type=button class="poub"><i class="fa-solid fa-trash-can"></i><button>
+        `
+        content.appendChild(figure)
+
+    })
+
+}

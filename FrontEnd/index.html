@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans:wght@300;400&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/modale.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 	<script type="module" src="script.js" defer></script>
 
@@ -49,11 +50,34 @@
 				<span>modifier</span>
 			</button>
 		</div>
+		<aside id="modale" aria-hidden="true" role="dialog" class="hidden">
+			<div class="modal-wrapper galerie-photo">
+				<div class="en-tete">
+					<div class="icon-buttons">
+						<div>
+							<i class="fa-solid fa-arrow-left"></i>
+						</div>
+						<div>
+							<i class="fa-solid fa-xmark"></i>
+						</div>
+					</div>
+					<h1>Galerie photo</h1>
+				</div>
+				<div class="content">
+				</div>
+				<div class="commande">
+					<button class="modale-button" type="button">
+						Ajouter une photo
+					</button>
+				</div>
+			</div>
+		</aside>
 		<div id="filters">
 		</div>
 		<div class="gallery">
 		</div>
 	</section>
+
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
