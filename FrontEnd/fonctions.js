@@ -77,11 +77,13 @@ export function modaleCreation(modale,projets){
         console.log(projet)
         const figure=document.createElement("figure")
         figure.innerHTML=`
-        <img src=${projet.imageUrl} alt=${projet.title}>
-        <button type=button class="poub"><i class="fa-solid fa-trash-can"></i><button>
+        <img src=${projet.imageUrl} alt=${projet.title} data-id=${projet.id}>
+        <button type="button" class="poub" data-id=${projet.id}><i class="fa-solid fa-trash-can"></i></button>
         `
         content.appendChild(figure)
 
     })
+}
+export function addEventListenerButtonPhoto(classeBoutons, projets){
 
 }

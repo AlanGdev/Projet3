@@ -48,18 +48,29 @@
     overflow: auto;
     flex-wrap: wrap;
     justify-content: space-between;
-
-
+}
+.galerie-photo figure{
+    position: relative;
 }
 .galerie-photo img{
     height: 102px;
     object-fit: cover;
     margin-bottom: 30px;
 }
-.galerie-photo img .poub{
+.galerie-photo .poub{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 17px;
+    height:17px;
     position: absolute;
-    right: -6px;
-    top: -6px;
+    right: 6px;
+    top: 6px;
+    background-color: #000000;
+    font-size: 11px;
+    color: #ffffff;
+    border-radius: 2px;
+    border: none;
 }
 
 .content{
@@ -85,6 +96,7 @@
 	text-align: center;
 	border-radius: 60px;
     margin:36px;
+    border: none;
 }
 .en-tete{
     width: 100%;
