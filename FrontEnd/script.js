@@ -1,5 +1,5 @@
 import * as fonction from './fonctions.js'
-// Création des fonctions
+// Création des fonctions pour modale
 const openModal=function (e){
    modale.classList.remove("hidden")
    modale.removeAttribute("aria-hidden")
@@ -7,7 +7,7 @@ const openModal=function (e){
    modale.addEventListener("click",closeModal)
    modale.querySelector(".js-modale-stop").addEventListener("click",stopPropagation)
    modaleBtnClose.addEventListener("click",closeModal)
-   fonction.showGalleriePhotoModale(modale,projects)
+   fonction.showGaleriePhotoModale(modale,projects,token)
 
 }
 
@@ -73,7 +73,7 @@ else{
    log.addEventListener("click",()=>{
       localStorage.removeItem("token")
    }) 
-   modifier.addEventListener("click",openModal)  
+   modifier.addEventListener("click",openModal)
 }
 
 

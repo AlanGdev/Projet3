@@ -21,7 +21,7 @@
 	border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 25px;
 }
@@ -55,15 +55,16 @@
     margin: 50px 0 0;
     overflow: auto;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content:flex-start;
+    gap: 10px;
 }
 .galerie-photo figure{
     position: relative;
 }
 .galerie-photo img{
-    height: 102px;
+    width: 76px;
     object-fit: cover;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .galerie-photo .poub{
     display: flex;
@@ -85,13 +86,18 @@
     width: 420px;
     display: flex;
 }
-
+.modal-footer{
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
+}
 
 .commande{
     width: 420px;
     border-top: solid 1px #b3b3b3;
     display: flex;
     justify-content: center;
+    align-items: flex-end;
 
 }
 .modale-button{
