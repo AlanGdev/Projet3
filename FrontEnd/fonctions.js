@@ -84,6 +84,18 @@ export function modaleCreation(modale,projets){
 
     })
 }
-export function addEventListenerButtonPhoto(classeBoutons, projets){
 
+export function showGalleriePhotoModale(modale,projets){
+    //Modale - Mode Galerie Photo
+    const content=modale.querySelector(".content")
+    effacerContenuBalise(content)
+    projets.forEach(projet=>{
+        console.log(projet)
+        const figure=document.createElement("figure")
+        figure.innerHTML=`
+        <img src=${projet.imageUrl} alt=${projet.title} data-id=${projet.id}>
+        <button type="button" class="poub" data-id=${projet.id}><i class="fa-solid fa-trash-can"></i></button>
+        `
+        content.appendChild(figure)
+    })
 }

@@ -1,4 +1,28 @@
 import * as fonction from './fonctions.js'
+// Création des fonctions
+const openModal=function (e){
+   modale.classList.remove("hidden")
+   modale.removeAttribute("aria-hidden")
+   modale.setAttribute("aria-modal","true")
+   modale.addEventListener("click",closeModal)
+   modale.querySelector(".js-modale-stop").addEventListener("click",stopPropagation)
+   modaleBtnClose.addEventListener("click",closeModal)
+   fonction.showGalleriePhotoModale(modale,projects)
+
+}
+
+const closeModal=function (e){
+   modale.classList.add("hidden")
+   modale.setAttribute("aria-hidden","true")
+   modale.removeAttribute("aria-modal")
+   modale.removeEventListener("click",closeModal)
+   modale.querySelector(".js-modale-stop").removeEventListener("click",stopPropagation)
+   modaleBtnClose.removeEventListener("click",closeModal)
+}
+
+const stopPropagation=function (e){
+   e.stopPropagation()
+}
 
 //verification si token
    const token=localStorage.getItem('token')
@@ -12,51 +36,45 @@ const projects=await respProjects.json()
 const respCategories=await fetch ('http://localhost:5678/api/categories')
 const categories= await respCategories.json()
 
+// Déclaration des constantes
 const editionMode=document.getElementById("edition-mode")
 const header=document.getElementById("header")
 const log=document.getElementById("log")
 const modifier=document.getElementById("modifier")
 const filters=document.getElementById("filters")
 const modale=document.getElementById("modale")
- 
-const gallery=document.querySelector(".gallery") //Récup. du conteneur gallery pour affichage projets
+const modaleBtnClose=document.getElementById("modale-btn-close")
+const gallery=document.querySelector(".gallery")
+
 fonction.effacerContenuBalise(gallery)
 fonction.afficherProjets(projects,gallery)
 
 if (!token){
+   // Ouverture de la page en mode consultation
    editionMode.classList.add("hidden")
    modifier.classList.add("hidden")
-   //Récupération du conteneur "filters" dans la page HTML (c'est là que sont affichés les filtres)
 
-   //Création du bouton Tous (toutes catégories) avec de base la classe filter-btn-clicked (bouton clické) et le data-id="Tous"
+   // Création des boutons de filtre + gestionnaire d'évènements
    fonction.createBtnFilterTous(filters)
-
-   // Pour chaque élément de categories: Création d'un bouton (avec id et class "filter-btn" (non cliqué))
    categories.forEach(categorie=>{
       fonction.createBtnFilter(filters,categorie)
    })
-
-   //On rajoute un gestionnaire d'évenements sur les boutons, au click
    fonction.addEventListenerButtonFilter(filters,projects,gallery)
 }
+
 else{
-   editionMode.classList.remove("hidden") // apparition "Mode edition"
-
-   header.classList.add("marge-top-110")// Marge-top header
-
-   modifier.classList.remove("hidden") // apparition "modifier"
-   modifier.addEventListener("click",()=>{
-      console.log("coucou")
-      fonction.modaleCreation(modale,projects)
-   })
-
+   //Ouverture de la page en mode edition
+   editionMode.classList.remove("hidden")
+   header.classList.add("marge-top-110")
+   modifier.classList.remove("hidden")
    filters.classList.add("hidden")
-
-   log.innerText="logout" // changement login en logout
+   log.innerText="logout"
    log.setAttribute("href","index.html")
    log.addEventListener("click",()=>{
       localStorage.removeItem("token")
-   })   
+   }) 
+   modifier.addEventListener("click",openModal)  
 }
+
 
 

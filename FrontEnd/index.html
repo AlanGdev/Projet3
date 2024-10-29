@@ -50,15 +50,19 @@
 				<span>modifier</span>
 			</button>
 		</div>
-		<aside id="modale" aria-hidden="true" role="dialog" class="hidden">
-			<div class="modal-wrapper galerie-photo">
+		<aside id="modale" aria-hidden="true" role="dialog" aria-labelledby="Galerie photo" class="hidden">
+			<div class="modal-wrapper js-modale-stop galerie-photo">
 				<div class="en-tete">
 					<div class="icon-buttons">
 						<div>
-							<i class="fa-solid fa-arrow-left hidden"></i>
+							<button id="modal-btn-arrow" class="">
+								<i class="fa-solid fa-arrow-left"></i>
+							</button>
 						</div>
 						<div>
-							<i class="fa-solid fa-xmark"></i>
+							<button id="modale-btn-close">
+								<i class="fa-solid fa-xmark"></i>
+							</button>
 						</div>
 					</div>
 					<h1>Galerie photo</h1>
