@@ -7,7 +7,7 @@ const openModal=function (e){
    modale.addEventListener("click",closeModal)
    modale.querySelector(".js-modale-stop").addEventListener("click",stopPropagation)
    modaleBtnClose.forEach((button)=>{button.addEventListener("click",closeModal)})
-   fonction.showGaleriePhotoModale(modale)
+   fonction.showGaleriePhotoModale()
 
 }
 
@@ -55,11 +55,11 @@ if (!token){
    modifier.classList.add("hidden")
 
    // Création des boutons de filtre + gestionnaire d'évènements
-   fonction.createBtnFilterTous(filters)
+   fonction.createBtnFilterTous()
    categories.forEach(categorie=>{
-      fonction.createBtnFilter(filters,categorie)
+      fonction.createBtnFilter(categorie)
    })
-   fonction.addEventListenerButtonFilter(filters,projects,gallery)
+   fonction.addEventListenerButtonFilter(projects)
 }
 
 else{

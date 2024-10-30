@@ -23,25 +23,30 @@ export function defineClassFilterBtn(btn,newClass){
     btn.classList.add(newClass)
 }
 
-export function createBtnFilterTous(classe){
-    // création du bouton "Tous" dans la classe passée en argument - dejà cliqué (filter-btn-clicked)
-    classe.innerHTML=`
+export function createBtnFilterTous(){
+    // création du bouton filtre "Tous" dejà cliqué (filter-btn-clicked)
+    const filters=document.getElementById("filters")
+    filters.innerHTML=`
     <button data-id="Tous" class="filter-btn-clicked">Tous</button>
     `
 }
 
-export function createBtnFilter(parent,categorie){
+export function createBtnFilter(categorie){
     // Création d'un bouton filtre catégorie
+    const filters=document.getElementById("filters")
     const btn=document.createElement("button") 
     btn.setAttribute("data-id",`${categorie.id}`)
     btn.innerText=`${categorie.name}`
     defineClassFilterBtn(btn,"filter-btn")
-    parent.appendChild(btn)
+    filters.appendChild(btn)
 }
 
-export function addEventListenerButtonFilter(classeBoutons,projets,classeProjets){
+export function addEventListenerButtonFilter(projets){
     // Gestionnaire d'évenement pour affichage projets par catégorie
-    const filters=classeBoutons.querySelectorAll("button")
+    const filtersbal=document.getElementById("filters")
+    const filters=filtersbal.querySelectorAll("button")
+    const gallery=document.querySelector(".gallery")
+
     filters.forEach(filterbtn=>
         filterbtn.addEventListener("click",()=>{
             //Passage de cliqué en non cliqué sur ancien bouton
@@ -65,14 +70,15 @@ export function addEventListenerButtonFilter(classeBoutons,projets,classeProjets
                     return[...projets]
                 }
             })()
-            effacerContenuBalise(classeProjets)
-            afficherProjets(filteredProjects,classeProjets)
+            effacerContenuBalise(gallery)
+            afficherProjets(filteredProjects,gallery)
         })
     )
 }
 /*****Fonctions Modale - Galerie Photo */
-export async function showGaleriePhotoModale(modale){
+export async function showGaleriePhotoModale(){
     //Modale - Mode Galerie Photo
+    const modale=document.getElementById("modale")
     const content=modale.querySelector(".content")
     effacerContenuBalise(content)
     const respProjects=await fetch('http://localhost:5678/api/works')
@@ -92,16 +98,18 @@ export async function showGaleriePhotoModale(modale){
 }
 
 export function addEventListenerTrashButton(modale){
+    // Modale: Ajout d'un gestionnaire d'evt sur chaque photo de la galerie
     const buttons=modale.querySelectorAll(".poub")
     buttons.forEach(button=>{
         button.addEventListener("click",()=>{
-            trashPhoto(modale,button.dataset.id)
+            trashPhoto(button.dataset.id)
         })
     })
 }
 
-export async function trashPhoto(modale,buttonDataId){
+export async function trashPhoto(buttonDataId){
     //Supprime la photo de l'API et de la modale
+    const modale=document.getElementById("modale")
     const token=getToken()
     const respTrash=await fetch(`http://localhost:5678/api/works/${buttonDataId}`,{
         method:"DELETE",
@@ -114,11 +122,11 @@ export async function trashPhoto(modale,buttonDataId){
     }
 }
 
-export function trashPhotoProjets(buttonDataId){
+export function trashPhotoProjets(projectId){
     // supprime la photo du Portfolio, sur la page du site 
     const mesProjets=document.querySelector(".gallery")
     console.log(mesProjets)
-    const figure=mesProjets.querySelector(`[data-figNumber="${buttonDataId}"]`)
+    const figure=mesProjets.querySelector(`[data-figNumber="${projectId}"]`)
     figure.remove() 
 }
 
