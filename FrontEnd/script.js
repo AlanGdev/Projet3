@@ -8,7 +8,6 @@ const openModal=function (e){
    modale.querySelector(".js-modale-stop").addEventListener("click",stopPropagation)
    modaleBtnClose.forEach((button)=>{button.addEventListener("click",closeModal)})
    fonction.showGaleriePhotoModale()
-
 }
 
 const closeModal=function (e){
@@ -18,6 +17,8 @@ const closeModal=function (e){
    modale.removeEventListener("click",closeModal)
    modale.querySelector(".js-modale-stop").removeEventListener("click",stopPropagation)
    modaleBtnClose.forEach((button)=>{removeEventListener("click",closeModal)})
+   addButton.removeEventListener("click",fonction.showAddPhotoModale)
+   fonction.hideModalAddMode()
 }
 
 const stopPropagation=function (e){
@@ -25,8 +26,7 @@ const stopPropagation=function (e){
 }
 
 //verification si token
-   const token=fonction.getToken()//localStorage.getItem('token')
-   console.log(token)
+   const token=fonction.getToken()
 
 // Envoi d'un fetch pour récup. des travaux sur l'API
 const respProjects=await fetch('http://localhost:5678/api/works')
@@ -45,6 +45,7 @@ const filters=document.getElementById("filters")
 const modale=document.getElementById("modale")
 const modaleBtnClose=document.querySelectorAll(".modale-btn-close")
 const gallery=document.querySelector(".gallery")
+const addButton=document.querySelector(".add-button")
 
 fonction.effacerContenuBalise(gallery)
 fonction.afficherProjets(projects)

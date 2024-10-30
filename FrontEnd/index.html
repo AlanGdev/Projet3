@@ -50,68 +50,6 @@
 				<span>modifier</span>
 			</button>
 		</div>
-		<aside id="modale" aria-hidden="true" role="dialog" aria-labelledby="Galerie photo" class="hidden">
-			<div class="modal-wrapper js-modale-stop">
-				<div class="galerie-photo contenu-modale">
-					<div class="en-tete">
-						<div class="icon-buttons">
-							<div>
-								<button class="modal-btn-arrow hidden">
-									<i class="fa-solid fa-arrow-left"></i>
-								</button>
-							</div>
-							<div>
-								<button class="modale-btn-close">
-									<i class="fa-solid fa-xmark"></i>
-								</button>
-							</div>
-						</div>
-						<h1>Galerie photo</h1>
-					</div>
-					<div class="content">
-					</div>
-					<div class="modal-footer">
-						<div class="commande">
-							<button class="add-button" type="button">
-								Ajouter une photo
-							</button>
-						</div>
-					</div>
-				</div>
-				<div class="ajout-photo contenu-modale hidden">
-					<div class="en-tete">
-						<div class="icon-buttons">
-							<div>
-								<button class="modal-btn-arrow">
-									<i class="fa-solid fa-arrow-left"></i>
-								</button>
-							</div>
-							<div>
-								<button class="modale-btn-close">
-									<i class="fa-solid fa-xmark"></i>
-								</button>
-							</div>
-						</div>
-						<h1>Ajout photo</h1>
-					</div>
-					<div class="content">
-						<div class="cadre-photo">
-							<i class="fa-regular fa-image"></i>
-							<p class="ajout">+ Ajouter photo</p>
-							<p class="format">jpg, png: 4mo max</p>
-
-						</div>
-					</div>
-					<div class="modal-footer">
-						<div class="commande">
-							<button class="validate-button" type="button">
-								Valider
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</aside>
 		<div id="filters">
 		</div>
 		<div class="gallery">
@@ -142,5 +80,82 @@
 		</nav>
 	</footer>
 </div>
+<aside id="modale" aria-hidden="true" role="dialog" aria-labelledby="Galerie photo" class="hidden">
+	<div class="modal-wrapper js-modale-stop">
+		<div class="galerie-photo contenu-modale">
+			<div class="en-tete">
+				<div class="icon-buttons">
+					<div>
+						<button class="modal-btn-arrow hidden">
+							<i class="fa-solid fa-arrow-left"></i>
+						</button>
+					</div>
+					<div>
+						<button class="modale-btn-close">
+							<i class="fa-solid fa-xmark"></i>
+						</button>
+					</div>
+				</div>
+				<h1>Galerie photo</h1>
+			</div>
+			<div class="content">
+			</div>
+			<div class="modal-footer">
+				<div class="commande">
+					<button class="add-button" type="button">
+						Ajouter une photo
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="ajout-photo contenu-modale hidden">
+			<div class="en-tete">
+				<div class="icon-buttons">
+					<div>
+						<button class="modal-btn-arrow">
+							<i class="fa-solid fa-arrow-left"></i>
+						</button>
+					</div>
+					<div>
+						<button class="modale-btn-close">
+							<i class="fa-solid fa-xmark"></i>
+						</button>
+					</div>
+				</div>
+				<h1>Ajout photo</h1>
+			</div>
+			<div class="content">
+				<div class="cadre-photo">
+					<img src="" alt="">
+					<i class="fa-regular fa-image"></i>
+					<div class="ajouter-photo">
+						<label for="input-photo" class="ajout">+ Ajouter photo</label>
+						<input type="file" src="" alt="" id="input-photo">
+					</div>
+					<p class="format">jpg, png: 4mo max</p>
+				</div>
+				<label for="title-form">Titre</label>
+				<input type="text" name="title" id="title-form">
+				<label for="category-form">Catégorie</label>
+				<div class="select-container">
+					<select name="category" id="category-form">
+						<option value="">espagne</option>
+						<option value="">espagne</option>
+						<option value="">espagne</option>
+					</select>
+					<i class="fa-solid fa-chevron-down"></i>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="commande">
+					<button class="validate-button" type="button">
+						Valider
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</aside>
+
 </body>
 </html>

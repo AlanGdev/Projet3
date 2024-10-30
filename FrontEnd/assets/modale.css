@@ -129,6 +129,7 @@
     width: 100%;
 }
 .cadre-photo{
+    box-sizing: border-box;
     width: 420px;
     height: 169px;
     display: flex;
@@ -138,7 +139,8 @@
     background-color: #e8f1f6;
     border-radius: 3px;
     padding: 15px;
-    gap:6px
+    gap:6px;
+    margin:30px 0 0;
 
 }
 .cadre-photo i{
@@ -155,8 +157,70 @@
     width: 173px;
     height: 36px;
     border-radius: 50px;
+    z-index: 1;
+    margin: 0;
+
+}
+#input-photo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    z-index: 0;
+    opacity: 50%;
 }
 .cadre-photo .format{
     font-size: 10px;
     color: #444444;
+}
+.cadre-photo .ajouter-photo{
+    align-items: center;
+    position: relative;
+}
+.ajout-photo .content{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#title-form,.select-container{
+    vertical-align: center;
+    box-sizing: border-box;
+    width: 420px;
+    height:51px;
+    box-shadow: 0px 4px 14px rgba(0,0,0,0.09);
+    border: none;
+    font-size: 14px;
+    color: #444444;
+}
+#title-form{
+    padding: 0 15px;
+}
+.select-container{
+    position: relative;
+}
+.select-container select{
+    width: 100%;
+    height: 100%;
+    padding: 0 15px;
+    appearance: none;
+    z-index: 0;
+    border: none;
+    box-sizing: border-box;
+}
+.select-container i{
+    z-index: 1;
+    position:absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.ajout-photo label{
+    font-weight: 500;
+    margin-top: 20px;
 }

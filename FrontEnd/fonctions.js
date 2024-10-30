@@ -12,7 +12,6 @@ export function afficherProjets(projets){
             <figcaption>${item.title}</figcaption>
             `
         figureBal.setAttribute("data-figNumber",`${item.id}`)//
-        console.log(item.id)//
         gallery.appendChild(figureBal)
     })
 }
@@ -132,13 +131,26 @@ export function trashPhotoProjets(projectId){
 
 export function addEventListenerModalAddButton(modale){
     const button=modale.querySelector(".add-button")
-    button.addEventListener("click",()=>{
-        modale.querySelector(".galerie-photo").classList.add("hidden")
-        modale.querySelector(".ajout-photo").classList.remove("hidden")
-    })
+    button.addEventListener("click",showAddPhotoModale)
 }
 
 export function getToken(){
     const token=localStorage.getItem("token")
     return token
+}
+
+export function hideModalAddMode(){
+    //Modale: classe "ajout-photo" en hidden / Retrait de hidden sur classe "galerie-photo"
+    const modale=document.getElementById("modale")
+    modale.querySelector(".ajout-photo").classList.add("hidden")
+    modale.querySelector(".galerie-photo").classList.remove("hidden")
+
+}
+
+export function showAddPhotoModale(){
+    //Modale: ouverture du mode Ajout Photo
+    const modale=document.getElementById("modale")
+    modale.querySelector(".galerie-photo").classList.add("hidden")
+    modale.querySelector(".ajout-photo").classList.remove("hidden")
+    console.log("coucou ajout photo")
 }
