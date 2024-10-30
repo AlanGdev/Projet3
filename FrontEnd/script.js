@@ -8,6 +8,7 @@ const openModal=function (e){
    modale.querySelector(".js-modale-stop").addEventListener("click",stopPropagation)
    modaleBtnClose.forEach((button)=>{button.addEventListener("click",closeModal)})
    fonction.showGaleriePhotoModale()
+   fonction.fillCategoryForm(categories)
 }
 
 const closeModal=function (e){
@@ -18,7 +19,10 @@ const closeModal=function (e){
    modale.querySelector(".js-modale-stop").removeEventListener("click",stopPropagation)
    modaleBtnClose.forEach((button)=>{removeEventListener("click",closeModal)})
    addButton.removeEventListener("click",fonction.showAddPhotoModale)
+   inputPhotoBtn.removeEventListener("change",fonction.addEventListenerUploadPicture)
+   fonction.trashPhotoPreview()
    fonction.hideModalAddMode()
+   fonction.clearCategoryForm()
 }
 
 const stopPropagation=function (e){
@@ -46,6 +50,7 @@ const modale=document.getElementById("modale")
 const modaleBtnClose=document.querySelectorAll(".modale-btn-close")
 const gallery=document.querySelector(".gallery")
 const addButton=document.querySelector(".add-button")
+const inputPhotoBtn=document.getElementById("input-photo")
 
 fonction.effacerContenuBalise(gallery)
 fonction.afficherProjets(projects)

@@ -76,6 +76,7 @@ export function addEventListenerButtonFilter(projets){
 }
 /*****Fonctions Modale - Galerie Photo */
 export async function showGaleriePhotoModale(){
+    hideModalAddMode()
     //Modale - Mode Galerie Photo
     const modale=document.getElementById("modale")
     const content=modale.querySelector(".content")
@@ -150,7 +151,65 @@ export function hideModalAddMode(){
 export function showAddPhotoModale(){
     //Modale: ouverture du mode Ajout Photo
     const modale=document.getElementById("modale")
+    const ajoutPhoto=document.getElementById("input-photo")
+    const arrowReturn=modale.querySelector(".ajout-photo .modal-btn-arrow")
+    console.log(arrowReturn)
     modale.querySelector(".galerie-photo").classList.add("hidden")
     modale.querySelector(".ajout-photo").classList.remove("hidden")
     console.log("coucou ajout photo")
+    ajoutPhoto.addEventListener("change",addEventListenerUploadPicture)
+    arrowReturn.addEventListener("click",returnShowGaleriePhotoModale)    
+}
+
+export function addEventListenerUploadPicture(event){
+    const file=event.target.files[0]
+    if(file){
+        const fileName=file.name
+        const fileExtension=fileName.split(".").pop().toLowerCase()
+        const fileSize=(file.size/1000)
+        console.log("fichier: "+ fileSize +"ko" + " extension:"+ fileExtension)
+        if (fileSize>4000 || ((fileExtension!="jpg")&&(fileExtension!="jpeg")&&(fileExtension!="png" ))){
+            document.getElementById("picture-error").classList.remove("hidden")
+
+            console.log("format de fichier non correct ou taille supérieure à 4mo")
+        }
+        else{
+            document.getElementById("picture-error").classList.add("hidden")
+            const modale=document.getElementById("modale")
+            const inputPhoto=modale.querySelector(".ajouter-photo")
+            console.log(inputPhoto)
+            const fileURL=URL.createObjectURL(file)
+            const baliseImagePreview=document.getElementById("photo-preview")
+            inputPhoto.classList.add("hidden")
+            baliseImagePreview.classList.add("image-for-upload")
+            baliseImagePreview.src=fileURL
+        }
+    }
+}
+export function trashPhotoPreview(){
+    const photoPreview=document.getElementById("photo-preview")
+    photoPreview.setAttribute("src","")
+    photoPreview.classList.remove("image-for-upload")
+    const modale=document.getElementById("modale")
+    modale.querySelector(".ajouter-photo").classList.remove("hidden")
+}
+export function returnShowGaleriePhotoModale(){
+    const inputPhotoBtn=document.getElementById("input-photo")
+    inputPhotoBtn.removeEventListener("change",addEventListenerUploadPicture)
+    trashPhotoPreview()
+    showGaleriePhotoModale()
+}
+export function fillCategoryForm(categories){
+    const categoryForm=document.getElementById("category-selector")
+    categories.forEach(categorie=>{
+        const option=document.createElement("option")
+        option.setAttribute("value",`${categorie.id}`)
+        option.innerText=`${categorie.name}`
+        categoryForm.appendChild(option)
+    })
+}
+export function clearCategoryForm(){
+    const categoryForm=document.getElementById("category-selector")
+    categoryForm.innerHTML='<option value="" selected>-- Sélectionnez une catégorie --</option>'
+
 }

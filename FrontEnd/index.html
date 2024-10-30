@@ -125,8 +125,9 @@
 				<h1>Ajout photo</h1>
 			</div>
 			<div class="content">
+				<p id="picture-error" class="hidden">Format de fichier ou taille invalide</p>
 				<div class="cadre-photo">
-					<img src="" alt="">
+					<img src="" alt="" id="photo-preview">
 					<i class="fa-regular fa-image"></i>
 					<div class="ajouter-photo">
 						<label for="input-photo" class="ajout">+ Ajouter photo</label>
@@ -136,12 +137,10 @@
 				</div>
 				<label for="title-form">Titre</label>
 				<input type="text" name="title" id="title-form">
-				<label for="category-form">Catégorie</label>
+				<label for="category-selector">Catégorie</label>
 				<div class="select-container">
-					<select name="category" id="category-form">
-						<option value="">espagne</option>
-						<option value="">espagne</option>
-						<option value="">espagne</option>
+					<select name="category" id="category-selector">
+						<option value="" selected>-- Sélectionnez une catégorie --</option>
 					</select>
 					<i class="fa-solid fa-chevron-down"></i>
 				</div>
