@@ -6,8 +6,8 @@ const openModal=function (e){
    modale.setAttribute("aria-modal","true")
    modale.addEventListener("click",closeModal)
    modale.querySelector(".js-modale-stop").addEventListener("click",stopPropagation)
-   modaleBtnClose.addEventListener("click",closeModal)
-   fonction.showGaleriePhotoModale(modale,projects,token)
+   modaleBtnClose.forEach((button)=>{button.addEventListener("click",closeModal)})
+   fonction.showGaleriePhotoModale(modale)
 
 }
 
@@ -17,7 +17,7 @@ const closeModal=function (e){
    modale.removeAttribute("aria-modal")
    modale.removeEventListener("click",closeModal)
    modale.querySelector(".js-modale-stop").removeEventListener("click",stopPropagation)
-   modaleBtnClose.removeEventListener("click",closeModal)
+   modaleBtnClose.forEach((button)=>{removeEventListener("click",closeModal)})
 }
 
 const stopPropagation=function (e){
@@ -25,7 +25,7 @@ const stopPropagation=function (e){
 }
 
 //verification si token
-   const token=localStorage.getItem('token')
+   const token=fonction.getToken()//localStorage.getItem('token')
    console.log(token)
 
 // Envoi d'un fetch pour récup. des travaux sur l'API
@@ -43,11 +43,11 @@ const log=document.getElementById("log")
 const modifier=document.getElementById("modifier")
 const filters=document.getElementById("filters")
 const modale=document.getElementById("modale")
-const modaleBtnClose=document.getElementById("modale-btn-close")
+const modaleBtnClose=document.querySelectorAll(".modale-btn-close")
 const gallery=document.querySelector(".gallery")
 
 fonction.effacerContenuBalise(gallery)
-fonction.afficherProjets(projects,gallery)
+fonction.afficherProjets(projects)
 
 if (!token){
    // Ouverture de la page en mode consultation

@@ -2,7 +2,9 @@ export function effacerContenuBalise(balise){
     balise.innerHTML=''
 }
 
-export function afficherProjets(projets,baliseAffichage){
+export function afficherProjets(projets){
+    //affichage projets dans la classe .gallery
+    const gallery=document.querySelector(".gallery")
     projets.forEach(item=>{
         let figureBal=document.createElement('figure')
         figureBal.innerHTML=`
@@ -11,7 +13,7 @@ export function afficherProjets(projets,baliseAffichage){
             `
         figureBal.setAttribute("data-figNumber",`${item.id}`)//
         console.log(item.id)//
-        baliseAffichage.appendChild(figureBal)
+        gallery.appendChild(figureBal)
     })
 }
 
@@ -69,11 +71,14 @@ export function addEventListenerButtonFilter(classeBoutons,projets,classeProjets
     )
 }
 /*****Fonctions Modale - Galerie Photo */
-export function showGaleriePhotoModale(modale,projets,token){
+export async function showGaleriePhotoModale(modale){
     //Modale - Mode Galerie Photo
     const content=modale.querySelector(".content")
     effacerContenuBalise(content)
-    projets.forEach(projet=>{
+    const respProjects=await fetch('http://localhost:5678/api/works')
+    const projects=await respProjects.json()
+
+    projects.forEach(projet=>{
         const figure=document.createElement("figure")
         figure.innerHTML=`
         <img src=${projet.imageUrl} alt=${projet.title} data-id=${projet.id}>
@@ -82,20 +87,22 @@ export function showGaleriePhotoModale(modale,projets,token){
         figure.setAttribute("data-figNumber",`${projet.id}`)
         content.appendChild(figure)
     })
-    addEventListenerTrashButton(modale,token)
+    addEventListenerTrashButton(modale)
+    addEventListenerModalAddButton(modale)
 }
 
-export function addEventListenerTrashButton(modale,token){
+export function addEventListenerTrashButton(modale){
     const buttons=modale.querySelectorAll(".poub")
     buttons.forEach(button=>{
         button.addEventListener("click",()=>{
-            trashPhoto(modale,button.dataset.id,token)
+            trashPhoto(modale,button.dataset.id)
         })
     })
 }
 
-export async function trashPhoto(modale,buttonDataId,token){
+export async function trashPhoto(modale,buttonDataId){
     //Supprime la photo de l'API et de la modale
+    const token=getToken()
     const respTrash=await fetch(`http://localhost:5678/api/works/${buttonDataId}`,{
         method:"DELETE",
         headers:{"Authorization":`Bearer ${token}`},
@@ -113,4 +120,17 @@ export function trashPhotoProjets(buttonDataId){
     console.log(mesProjets)
     const figure=mesProjets.querySelector(`[data-figNumber="${buttonDataId}"]`)
     figure.remove() 
+}
+
+export function addEventListenerModalAddButton(modale){
+    const button=modale.querySelector(".add-button")
+    button.addEventListener("click",()=>{
+        modale.querySelector(".galerie-photo").classList.add("hidden")
+        modale.querySelector(".ajout-photo").classList.remove("hidden")
+    })
+}
+
+export function getToken(){
+    const token=localStorage.getItem("token")
+    return token
 }
