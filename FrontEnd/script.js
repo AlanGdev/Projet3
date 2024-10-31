@@ -20,6 +20,7 @@ const closeModal=function (e){
    modaleBtnClose.forEach((button)=>{removeEventListener("click",closeModal)})
    addButton.removeEventListener("click",fonction.showAddPhotoModale)
    inputPhotoBtn.removeEventListener("change",fonction.addEventListenerUploadPicture)
+   document.getElementById("picture-error").classList.add("hidden")
    fonction.trashPhotoPreview()
    fonction.hideModalAddMode()
    fonction.clearCategoryForm()

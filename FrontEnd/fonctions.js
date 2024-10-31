@@ -16,7 +16,7 @@ export function afficherProjets(projets){
     })
 }
 
-export function defineClassFilterBtn(btn,newClass){
+function defineClassFilterBtn(btn,newClass){
     // Effacement de la classe du bouton et ajout de la nouvelle classe
     btn.className="" 
     btn.classList.add(newClass)
@@ -97,7 +97,7 @@ export async function showGaleriePhotoModale(){
     addEventListenerModalAddButton(modale)
 }
 
-export function addEventListenerTrashButton(modale){
+function addEventListenerTrashButton(modale){
     // Modale: Ajout d'un gestionnaire d'evt sur chaque photo de la galerie
     const buttons=modale.querySelectorAll(".poub")
     buttons.forEach(button=>{
@@ -107,7 +107,7 @@ export function addEventListenerTrashButton(modale){
     })
 }
 
-export async function trashPhoto(buttonDataId){
+async function trashPhoto(buttonDataId){
     //Supprime la photo de l'API et de la modale
     const modale=document.getElementById("modale")
     const token=getToken()
@@ -122,7 +122,7 @@ export async function trashPhoto(buttonDataId){
     }
 }
 
-export function trashPhotoProjets(projectId){
+function trashPhotoProjets(projectId){
     // supprime la photo du Portfolio, sur la page du site 
     const mesProjets=document.querySelector(".gallery")
     console.log(mesProjets)
@@ -130,7 +130,7 @@ export function trashPhotoProjets(projectId){
     figure.remove() 
 }
 
-export function addEventListenerModalAddButton(modale){
+function addEventListenerModalAddButton(modale){
     const button=modale.querySelector(".add-button")
     button.addEventListener("click",showAddPhotoModale)
 }
@@ -186,6 +186,7 @@ export function addEventListenerUploadPicture(event){
         }
     }
 }
+
 export function trashPhotoPreview(){
     const photoPreview=document.getElementById("photo-preview")
     photoPreview.setAttribute("src","")
@@ -193,12 +194,15 @@ export function trashPhotoPreview(){
     const modale=document.getElementById("modale")
     modale.querySelector(".ajouter-photo").classList.remove("hidden")
 }
-export function returnShowGaleriePhotoModale(){
+
+function returnShowGaleriePhotoModale(){
     const inputPhotoBtn=document.getElementById("input-photo")
     inputPhotoBtn.removeEventListener("change",addEventListenerUploadPicture)
     trashPhotoPreview()
+    document.getElementById("picture-error").classList.add("hidden")
     showGaleriePhotoModale()
 }
+
 export function fillCategoryForm(categories){
     const categoryForm=document.getElementById("category-selector")
     categories.forEach(categorie=>{
@@ -208,6 +212,7 @@ export function fillCategoryForm(categories){
         categoryForm.appendChild(option)
     })
 }
+
 export function clearCategoryForm(){
     const categoryForm=document.getElementById("category-selector")
     categoryForm.innerHTML='<option value="" selected>-- Sélectionnez une catégorie --</option>'

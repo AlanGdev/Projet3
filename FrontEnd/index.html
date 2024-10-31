@@ -124,34 +124,37 @@
 				</div>
 				<h1>Ajout photo</h1>
 			</div>
-			<div class="content">
-				<p id="picture-error" class="hidden">Format de fichier ou taille invalide</p>
-				<div class="cadre-photo">
-					<img src="" alt="" id="photo-preview">
-					<i class="fa-regular fa-image"></i>
-					<div class="ajouter-photo">
-						<label for="input-photo" class="ajout">+ Ajouter photo</label>
-						<input type="file" src="" alt="" id="input-photo">
+			<!-- <form action=""> -->
+				<div class="content">
+					<p id="picture-error" class="hidden">Format de fichier ou taille invalide</p>
+					<div class="cadre-photo">
+						<img src="" alt="" id="photo-preview">
+						<i class="fa-regular fa-image"></i>
+						<div class="ajouter-photo">
+							<label for="input-photo" class="ajout">+ Ajouter photo</label>
+							<input type="file" src="" alt="" id="input-photo">
+						</div>
+						<p class="format">jpg, png: 4mo max</p>
 					</div>
-					<p class="format">jpg, png: 4mo max</p>
+					<label for="title-form">Titre</label>
+					<input type="text" name="title" id="title-form">
+					<label for="category-selector">Catégorie</label>
+					<div class="select-container">
+						<select name="category" id="category-selector">
+							<option value="" selected></option>
+						</select>
+						<i class="fa-solid fa-chevron-down"></i>
+					</div>
 				</div>
-				<label for="title-form">Titre</label>
-				<input type="text" name="title" id="title-form">
-				<label for="category-selector">Catégorie</label>
-				<div class="select-container">
-					<select name="category" id="category-selector">
-						<option value="" selected>-- Sélectionnez une catégorie --</option>
-					</select>
-					<i class="fa-solid fa-chevron-down"></i>
+				<div class="modal-footer">
+					<div class="commande">
+						<button class="validate-button" type="button">
+							Valider
+						</button>
+					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<div class="commande">
-					<button class="validate-button" type="button">
-						Valider
-					</button>
-				</div>
-			</div>
+			<!-- </form> -->
+
 		</div>
 	</div>
 </aside>
