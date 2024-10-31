@@ -124,7 +124,7 @@
 				</div>
 				<h1>Ajout photo</h1>
 			</div>
-			<!-- <form action=""> -->
+			<form action="#">
 				<div class="content">
 					<p id="picture-error" class="hidden">Format de fichier ou taille invalide</p>
 					<div class="cadre-photo">
@@ -132,15 +132,15 @@
 						<i class="fa-regular fa-image"></i>
 						<div class="ajouter-photo">
 							<label for="input-photo" class="ajout">+ Ajouter photo</label>
-							<input type="file" src="" alt="" id="input-photo">
+							<input type="file" src="" alt="" id="input-photo" required>
 						</div>
 						<p class="format">jpg, png: 4mo max</p>
 					</div>
 					<label for="title-form">Titre</label>
-					<input type="text" name="title" id="title-form">
+					<input type="text" name="title" id="title-form" required>
 					<label for="category-selector">Catégorie</label>
 					<div class="select-container">
-						<select name="category" id="category-selector">
+						<select name="category" id="category-selector" required>
 							<option value="" selected></option>
 						</select>
 						<i class="fa-solid fa-chevron-down"></i>
@@ -148,12 +148,12 @@
 				</div>
 				<div class="modal-footer">
 					<div class="commande">
-						<button class="validate-button" type="button">
+						<button class="validate-button" type="submit">
 							Valider
 						</button>
 					</div>
 				</div>
-			<!-- </form> -->
+			</form>
 
 		</div>
 	</div>

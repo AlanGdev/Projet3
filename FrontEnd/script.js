@@ -22,6 +22,7 @@ const closeModal=function (e){
    inputPhotoBtn.removeEventListener("change",fonction.addEventListenerUploadPicture)
    document.getElementById("picture-error").classList.add("hidden")
    fonction.trashPhotoPreview()
+   fonction.trashAllFields
    fonction.hideModalAddMode()
    fonction.clearCategoryForm()
 }

@@ -1,7 +1,14 @@
+/*****Fontions générales */
 export function effacerContenuBalise(balise){
     balise.innerHTML=''
 }
 
+export function getToken(){
+    const token=localStorage.getItem("token")
+    return token
+}
+
+/*****Fonctions page principale */
 export function afficherProjets(projets){
     //affichage projets dans la classe .gallery
     const gallery=document.querySelector(".gallery")
@@ -75,6 +82,7 @@ export function addEventListenerButtonFilter(projets){
     )
 }
 /*****Fonctions Modale - Galerie Photo */
+
 export async function showGaleriePhotoModale(){
     hideModalAddMode()
     //Modale - Mode Galerie Photo
@@ -135,11 +143,6 @@ function addEventListenerModalAddButton(modale){
     button.addEventListener("click",showAddPhotoModale)
 }
 
-export function getToken(){
-    const token=localStorage.getItem("token")
-    return token
-}
-
 export function hideModalAddMode(){
     //Modale: classe "ajout-photo" en hidden / Retrait de hidden sur classe "galerie-photo"
     const modale=document.getElementById("modale")
@@ -150,18 +153,23 @@ export function hideModalAddMode(){
 
 export function showAddPhotoModale(){
     //Modale: ouverture du mode Ajout Photo
+    console.log("Mode ajout photo")
     const modale=document.getElementById("modale")
     const ajoutPhoto=document.getElementById("input-photo")
     const arrowReturn=modale.querySelector(".ajout-photo .modal-btn-arrow")
+    const form=modale.querySelector("form")
     console.log(arrowReturn)
     modale.querySelector(".galerie-photo").classList.add("hidden")
     modale.querySelector(".ajout-photo").classList.remove("hidden")
-    console.log("coucou ajout photo")
     ajoutPhoto.addEventListener("change",addEventListenerUploadPicture)
-    arrowReturn.addEventListener("click",returnShowGaleriePhotoModale)    
+    console.log("gestionnaire evt upload preview ajouté")
+    arrowReturn.addEventListener("click",returnShowGaleriePhotoModale)
+    form.addEventListener("input",fieldsVerification)    
+    form.addEventListener("change",fieldsVerification)    
 }
 
 export function addEventListenerUploadPicture(event){
+    console.log(" test chargement preview")
     const file=event.target.files[0]
     if(file){
         const fileName=file.name
@@ -170,7 +178,6 @@ export function addEventListenerUploadPicture(event){
         console.log("fichier: "+ fileSize +"ko" + " extension:"+ fileExtension)
         if (fileSize>4000 || ((fileExtension!="jpg")&&(fileExtension!="jpeg")&&(fileExtension!="png" ))){
             document.getElementById("picture-error").classList.remove("hidden")
-
             console.log("format de fichier non correct ou taille supérieure à 4mo")
         }
         else{
@@ -182,12 +189,14 @@ export function addEventListenerUploadPicture(event){
             const baliseImagePreview=document.getElementById("photo-preview")
             inputPhoto.classList.add("hidden")
             baliseImagePreview.classList.add("image-for-upload")
+            console.log("image for upload ajouté")
             baliseImagePreview.src=fileURL
         }
     }
 }
 
 export function trashPhotoPreview(){
+    //On vide la balise img
     const photoPreview=document.getElementById("photo-preview")
     photoPreview.setAttribute("src","")
     photoPreview.classList.remove("image-for-upload")
@@ -195,12 +204,24 @@ export function trashPhotoPreview(){
     modale.querySelector(".ajouter-photo").classList.remove("hidden")
 }
 
+export function trashAllFields(){
+    // On vide tous les champs
+    const modale=document.getElementById("modale")
+    const fields=modale.querySelectorAll("input,select")
+    fields.forEach(field=>{
+        field.value=""})
+}
+
 function returnShowGaleriePhotoModale(){
     const inputPhotoBtn=document.getElementById("input-photo")
     inputPhotoBtn.removeEventListener("change",addEventListenerUploadPicture)
     trashPhotoPreview()
+    trashAllFields()
     document.getElementById("picture-error").classList.add("hidden")
     showGaleriePhotoModale()
+    const modale=document.getElementById("modale")
+    const submitButton=modale.querySelector(".validate-button")
+    submitButton.classList.remove("green")
 }
 
 export function fillCategoryForm(categories){
@@ -217,4 +238,23 @@ export function clearCategoryForm(){
     const categoryForm=document.getElementById("category-selector")
     categoryForm.innerHTML='<option value="" selected>-- Sélectionnez une catégorie --</option>'
 
+}
+
+function fieldsVerification(){
+    //Vérif. des champs pour passage du bouton valider en vert
+    const modale=document.getElementById("modale")
+    const submitButton=modale.querySelector(".validate-button")
+    const inputFile=document.getElementById("input-photo")
+    const inputTitle=document.getElementById("title-form")
+    const inputCategory=document.getElementById("category-selector")
+    console.log(`${inputFile.files.length} ${inputTitle.value} ${inputCategory.value}`)
+    if (inputFile.files.length && inputTitle.value && inputCategory.value){
+    submitButton.classList.add("green")
+    console.log("nouvelle classe")
+    }
+    else {
+        submitButton.classList.remove("green")
+            console.log("Pas de nouvelle classe")
+    }
+    
 }
