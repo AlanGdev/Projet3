@@ -22,9 +22,12 @@ const closeModal=function (e){
    inputPhotoBtn.removeEventListener("change",fonction.addEventListenerUploadPicture)
    document.getElementById("picture-error").classList.add("hidden")
    fonction.trashPhotoPreview()
-   fonction.trashAllFields
+   fonction.trashAllFields()
    fonction.hideModalAddMode()
    fonction.clearCategoryForm()
+   const form=modale.querySelector("form")
+   form.removeEventListener("input",fonction.fieldsVerification)    
+   form.removeEventListener("change",fonction.fieldsVerification)    
 }
 
 const stopPropagation=function (e){

@@ -165,7 +165,8 @@ export function showAddPhotoModale(){
     console.log("gestionnaire evt upload preview ajouté")
     arrowReturn.addEventListener("click",returnShowGaleriePhotoModale)
     form.addEventListener("input",fieldsVerification)    
-    form.addEventListener("change",fieldsVerification)    
+    form.addEventListener("change",fieldsVerification) 
+    form.addEventListener("submit",submitPictureForm)   
 }
 
 export function addEventListenerUploadPicture(event){
@@ -191,6 +192,7 @@ export function addEventListenerUploadPicture(event){
             baliseImagePreview.classList.add("image-for-upload")
             console.log("image for upload ajouté")
             baliseImagePreview.src=fileURL
+            console.log(fileURL)
         }
     }
 }
@@ -221,7 +223,10 @@ function returnShowGaleriePhotoModale(){
     showGaleriePhotoModale()
     const modale=document.getElementById("modale")
     const submitButton=modale.querySelector(".validate-button")
+    const form=modale.querySelector("form")
     submitButton.classList.remove("green")
+    form.removeEventListener("input",fieldsVerification)    
+    form.removeEventListener("change",fieldsVerification)    
 }
 
 export function fillCategoryForm(categories){
@@ -236,7 +241,7 @@ export function fillCategoryForm(categories){
 
 export function clearCategoryForm(){
     const categoryForm=document.getElementById("category-selector")
-    categoryForm.innerHTML='<option value="" selected>-- Sélectionnez une catégorie --</option>'
+    categoryForm.innerHTML='<option value="" selected></option>'
 
 }
 
@@ -257,4 +262,28 @@ function fieldsVerification(){
             console.log("Pas de nouvelle classe")
     }
     
+}
+async function submitPictureForm(e){
+    e.preventDefault()
+    const inputFile=document.getElementById("input-photo").files[0]
+    const inputTitle=document.getElementById("title-form").value
+    const categorySelector=document.getElementById("category-selector").value
+    const submitInfos=new FormData()
+    /*submitInfos.title=inputTitle
+    submitInfos.image=inputFile
+    submitInfos.category=categorySelector*/
+    submitInfos.append("image",inputFile)
+    submitInfos.append("title",inputTitle)
+    submitInfos.append("category",categorySelector)
+    console.log(submitInfos)
+    console.log(JSON.stringify(submitInfos))
+    const token=getToken()
+    const response=await fetch("http://localhost:5678/api/works",{
+        method:"POST",
+        headers:{
+            "Authorization":`Bearer ${token}`,
+            },
+        body:submitInfos
+    })
+    console.log(response.status)
 }
