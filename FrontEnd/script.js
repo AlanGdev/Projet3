@@ -2,34 +2,44 @@ import * as fonction from './fonctions.js'
 
 // Création des fonctions pour modale
 const openModal=function (e){
+   console.log("ouverture modale")
+
    modale.classList.remove("hidden")
    modale.removeAttribute("aria-hidden")
    modale.setAttribute("aria-modal","true")
    modale.addEventListener("click",closeModal)
-   modale.querySelector(".js-modale-stop").addEventListener("click",stopPropagation)
+   modale.querySelector(".modal-wrapper").addEventListener("click",stopPropagation)
    modaleBtnClose.forEach((button)=>{button.addEventListener("click",closeModal)})
+   modaleAddButton.addEventListener("click",showAddPhotoMode)
+   form.addEventListener("submit",submitAjoutPhoto)
+
    fonction.showGaleriePhotoModale(modale)
    fonction.fillCategoryForm(categories)
-   form.addEventListener("submit",submitAjoutPhoto)
+
 }
 
 const closeModal=function (e){
+   console.log("fermeture modale")
    modale.classList.add("hidden")
    modale.setAttribute("aria-hidden","true")
    modale.removeAttribute("aria-modal")
-   modale.removeEventListener("click",closeModal)
-   modale.querySelector(".js-modale-stop").removeEventListener("click",stopPropagation)
-   modaleBtnClose.forEach((button)=>{removeEventListener("click",closeModal)})
-   addButton.removeEventListener("click",fonction.showAddPhotoModale)
-   inputPhotoBtn.removeEventListener("change",fonction.addEventListenerUploadPicture)
+
+   fonction.effacerContenuBalise(galerieModeContent)
    document.getElementById("picture-error").classList.add("hidden")
+
+   modale.removeEventListener("click",closeModal)
+   modale.querySelector(".modal-wrapper").removeEventListener("click",stopPropagation)
+   modaleBtnClose.forEach((button)=>{removeEventListener("click",closeModal)})
+   modaleAddButton.removeEventListener("click",showAddPhotoMode)
+   inputPhotoBtn.removeEventListener("change",fonction.previewUpload)
+   form.removeEventListener("input",fonction.fieldsVerification)    
+   form.removeEventListener("submit",submitAjoutPhoto)
+
    fonction.trashPhotoPreview()
    fonction.trashAllFields()
-   fonction.hideModalAddMode()
    fonction.clearCategoryForm()
-   form.removeEventListener("input",fonction.fieldsVerification)    
-   form.removeEventListener("change",fonction.fieldsVerification)    
-   form.removeEventListener("submit",submitAjoutPhoto)
+   fonction.hideModalAddMode(modale)
+
 }
 
 const stopPropagation=function (e){
@@ -38,6 +48,10 @@ const stopPropagation=function (e){
 
 const submitAjoutPhoto=(e)=>{
    fonction.submitPictureForm(e,closeModal)
+}
+
+const showAddPhotoMode=(e)=>{
+   fonction.showAddPhotoModale(e,modale)
 }
 
 //Récupération du token (Null si inexistant)
@@ -60,9 +74,10 @@ const filters=document.getElementById("filters")
 const modale=document.getElementById("modale")
 const modaleBtnClose=document.querySelectorAll(".modale-btn-close")
 const gallery=document.querySelector(".gallery")
-const addButton=document.querySelector(".add-button")
+const modaleAddButton=document.querySelector(".add-button")
 const inputPhotoBtn=document.getElementById("input-photo")
 const form=modale.querySelector("form")
+const galerieModeContent=modale.querySelector(".galerie-photo .content")
 
 fonction.afficherProjets(projects)
 
@@ -73,6 +88,7 @@ if (!token){
 
    // Création des boutons de filtre + gestionnaire d'évènements
    fonction.createBtnFilterTous()
+   console.log("Création des boutons filtre de chaque catégorie")
    categories.forEach(categorie=>{
       fonction.createBtnFilter(categorie)
    })
@@ -89,6 +105,7 @@ else{
    log.setAttribute("href","index.html")
    log.addEventListener("click",()=>{
       localStorage.removeItem("token")
+      console.log("Effacement token")
    }) 
    modifier.addEventListener("click",openModal)
 }
