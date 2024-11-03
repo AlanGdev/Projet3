@@ -1,4 +1,10 @@
 /*****Fontions générales */
+async function getProjects() {
+    const response=await fetch('http://localhost:5678/api/works')
+    const projects=await response.json()
+    return projects
+}
+
 export function effacerContenuBalise(balise){
     balise.innerHTML=''
 }
@@ -9,6 +15,7 @@ export function getToken(){
 }
 
 /*****Fonctions page principale */
+
 export function afficherProjets(projets){
     //affichage projets dans la classe .gallery
     const gallery=document.querySelector(".gallery")
@@ -83,10 +90,9 @@ export function addEventListenerButtonFilter(projets){
 }
 /*****Fonctions Modale - Galerie Photo */
 
-export async function showGaleriePhotoModale(){
+export async function showGaleriePhotoModale(modale){
     hideModalAddMode()
     //Modale - Mode Galerie Photo
-    const modale=document.getElementById("modale")
     const content=modale.querySelector(".content")
     effacerContenuBalise(content)
     const respProjects=await fetch('http://localhost:5678/api/works')
@@ -110,19 +116,21 @@ function addEventListenerTrashButton(modale){
     const buttons=modale.querySelectorAll(".poub")
     buttons.forEach(button=>{
         button.addEventListener("click",()=>{
-            trashPhoto(button.dataset.id)
+            trashPhoto(button.dataset.id,modale)
         })
     })
 }
 
-async function trashPhoto(buttonDataId){
+async function trashPhoto(buttonDataId,modale){
     //Supprime la photo de l'API et de la modale
-    const modale=document.getElementById("modale")
+    console.log("suppression photo de bdd et galerie")
+
     const token=getToken()
     const respTrash=await fetch(`http://localhost:5678/api/works/${buttonDataId}`,{
         method:"DELETE",
         headers:{"Authorization":`Bearer ${token}`},
     })
+
     if (respTrash.ok){
         const figure=modale.querySelector(`[data-figNumber="${buttonDataId}"]`)
         figure.remove()
@@ -131,9 +139,10 @@ async function trashPhoto(buttonDataId){
 }
 
 function trashPhotoProjets(projectId){
-    // supprime la photo du Portfolio, sur la page du site 
+    // supprime photo du Portfolio 
+    console.log("Suppression photo du Portfolio")
+
     const mesProjets=document.querySelector(".gallery")
-    console.log(mesProjets)
     const figure=mesProjets.querySelector(`[data-figNumber="${projectId}"]`)
     figure.remove() 
 }
@@ -166,7 +175,6 @@ export function showAddPhotoModale(){
     arrowReturn.addEventListener("click",returnShowGaleriePhotoModale)
     form.addEventListener("input",fieldsVerification)    
     form.addEventListener("change",fieldsVerification) 
-    form.addEventListener("submit",submitPictureForm)   
 }
 
 export function addEventListenerUploadPicture(event){
@@ -263,7 +271,7 @@ function fieldsVerification(){
     }
     
 }
-async function submitPictureForm(e){
+export async function submitPictureForm(e,closeModal){
     e.preventDefault()
     const inputFile=document.getElementById("input-photo").files[0]
     const inputTitle=document.getElementById("title-form").value
@@ -286,4 +294,11 @@ async function submitPictureForm(e){
         body:submitInfos
     })
     console.log(response.status)
+    const projects= await getProjects()
+    const gallery=document.querySelector(".gallery")
+    console.log(projects)
+    effacerContenuBalise(gallery)
+    afficherProjets(projects)
+    closeModal()
+    
 }

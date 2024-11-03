@@ -1,4 +1,5 @@
 import * as fonction from './fonctions.js'
+
 // Création des fonctions pour modale
 const openModal=function (e){
    modale.classList.remove("hidden")
@@ -7,8 +8,9 @@ const openModal=function (e){
    modale.addEventListener("click",closeModal)
    modale.querySelector(".js-modale-stop").addEventListener("click",stopPropagation)
    modaleBtnClose.forEach((button)=>{button.addEventListener("click",closeModal)})
-   fonction.showGaleriePhotoModale()
+   fonction.showGaleriePhotoModale(modale)
    fonction.fillCategoryForm(categories)
+   form.addEventListener("submit",submitAjoutPhoto)
 }
 
 const closeModal=function (e){
@@ -25,17 +27,21 @@ const closeModal=function (e){
    fonction.trashAllFields()
    fonction.hideModalAddMode()
    fonction.clearCategoryForm()
-   const form=modale.querySelector("form")
    form.removeEventListener("input",fonction.fieldsVerification)    
    form.removeEventListener("change",fonction.fieldsVerification)    
+   form.removeEventListener("submit",submitAjoutPhoto)
 }
 
 const stopPropagation=function (e){
    e.stopPropagation()
 }
 
-//verification si token
-   const token=fonction.getToken()
+const submitAjoutPhoto=(e)=>{
+   fonction.submitPictureForm(e,closeModal)
+}
+
+//Récupération du token (Null si inexistant)
+const token=fonction.getToken()
 
 // Envoi d'un fetch pour récup. des travaux sur l'API
 const respProjects=await fetch('http://localhost:5678/api/works')
@@ -56,8 +62,8 @@ const modaleBtnClose=document.querySelectorAll(".modale-btn-close")
 const gallery=document.querySelector(".gallery")
 const addButton=document.querySelector(".add-button")
 const inputPhotoBtn=document.getElementById("input-photo")
+const form=modale.querySelector("form")
 
-fonction.effacerContenuBalise(gallery)
 fonction.afficherProjets(projects)
 
 if (!token){
