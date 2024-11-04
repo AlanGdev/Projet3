@@ -1,12 +1,44 @@
 import * as fonction from './fonctions.js'
 
-// Création des fonctions pour modale
+/***** Déclaration variables et constantes *****/
+
+// Envoi d'un fetch pour récup. des travaux sur l'API
+const respProjects=await fetch('http://localhost:5678/api/works')
+const projects=await respProjects.json()
+
+// Envoi d'un fetch pour récup. des catégories
+const respCategories=await fetch ('http://localhost:5678/api/categories')
+const categories= await respCategories.json()
+
+//Récupération du token (Null si inexistant)
+const token=fonction.getToken()
+
+// constantes générales
+const filters=document.getElementById("filters")
+const gallery=document.querySelector(".gallery")
+
+//mode édition
+const editionMode=document.getElementById("edition-mode")
+const header=document.getElementById("header")
+const log=document.getElementById("log")
+const modifier=document.getElementById("modifier")
+
+// modale
+const modale=document.getElementById("modale")
+const modaleBtnClose=document.querySelectorAll(".modale-btn-close")
+const modaleAddButton=document.querySelector(".add-button")
+const inputPhotoBtn=document.getElementById("input-photo")
+const form=modale.querySelector("form")
+const galerieModeContent=modale.querySelector(".galerie-photo .content")
+const submitButton=modale.querySelector(".validate-button")
+
 const openModal=function (e){
    console.log("ouverture modale")
 
    modale.classList.remove("hidden")
    modale.removeAttribute("aria-hidden")
    modale.setAttribute("aria-modal","true")
+   
    modale.addEventListener("click",closeModal)
    modale.querySelector(".modal-wrapper").addEventListener("click",stopPropagation)
    modaleBtnClose.forEach((button)=>{button.addEventListener("click",closeModal)})
@@ -15,7 +47,6 @@ const openModal=function (e){
 
    fonction.showGaleriePhotoModale(modale)
    fonction.fillCategoryForm(categories)
-
 }
 
 const closeModal=function (e){
@@ -26,6 +57,7 @@ const closeModal=function (e){
 
    fonction.effacerContenuBalise(galerieModeContent)
    document.getElementById("picture-error").classList.add("hidden")
+   submitButton.classList.remove("green")
 
    modale.removeEventListener("click",closeModal)
    modale.querySelector(".modal-wrapper").removeEventListener("click",stopPropagation)
@@ -39,7 +71,6 @@ const closeModal=function (e){
    fonction.trashAllFields()
    fonction.clearCategoryForm()
    fonction.hideModalAddMode(modale)
-
 }
 
 const stopPropagation=function (e){
@@ -54,30 +85,7 @@ const showAddPhotoMode=(e)=>{
    fonction.showAddPhotoModale(e,modale)
 }
 
-//Récupération du token (Null si inexistant)
-const token=fonction.getToken()
-
-// Envoi d'un fetch pour récup. des travaux sur l'API
-const respProjects=await fetch('http://localhost:5678/api/works')
-const projects=await respProjects.json()
-
-// Envoi d'un fetch pour récup. des catégories
-const respCategories=await fetch ('http://localhost:5678/api/categories')
-const categories= await respCategories.json()
-
-// Déclaration des constantes
-const editionMode=document.getElementById("edition-mode")
-const header=document.getElementById("header")
-const log=document.getElementById("log")
-const modifier=document.getElementById("modifier")
-const filters=document.getElementById("filters")
-const modale=document.getElementById("modale")
-const modaleBtnClose=document.querySelectorAll(".modale-btn-close")
-const gallery=document.querySelector(".gallery")
-const modaleAddButton=document.querySelector(".add-button")
-const inputPhotoBtn=document.getElementById("input-photo")
-const form=modale.querySelector("form")
-const galerieModeContent=modale.querySelector(".galerie-photo .content")
+/******/
 
 fonction.afficherProjets(projects)
 

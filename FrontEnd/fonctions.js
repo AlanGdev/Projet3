@@ -328,8 +328,6 @@ export async function submitPictureForm(e,closeModal){
     const projects= await getProjects()
     const gallery=document.querySelector(".gallery")
 
-    console.log(projects)
-
     effacerContenuBalise(gallery)
     afficherProjets(projects)
     closeModal() 
