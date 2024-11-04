@@ -207,12 +207,13 @@ export function previewUpload(event){
             const modale=document.getElementById("modale")
             const inputPhoto=modale.querySelector(".ajouter-photo")
             const fileURL=URL.createObjectURL(file)
-            const baliseImagePreview=document.getElementById("photo-preview")
+            const photoPreview=document.getElementById("photo-preview")
 
             document.getElementById("picture-error").classList.add("hidden")
             inputPhoto.classList.add("hidden")
-            baliseImagePreview.classList.add("image-for-upload")
-            baliseImagePreview.src=fileURL
+            photoPreview.classList.remove("hidden")
+            photoPreview.setAttribute("src",fileURL)
+            photoPreview.setAttribute("alt","preview image")
 
             console.log("photo preview ajoutée")
         }
@@ -225,8 +226,9 @@ export function trashPhotoPreview(){
     const photoPreview=document.getElementById("photo-preview")
 
     modale.querySelector(".ajouter-photo").classList.remove("hidden")
-    photoPreview.setAttribute("src","")
-    photoPreview.classList.remove("image-for-upload")
+    photoPreview.classList.add("hidden")
+    photoPreview.setAttribute("src","DefaultPhotoPreview.png")
+    photoPreview.setAttribute("alt","Preview")
 }
 
 export function trashAllFields(){

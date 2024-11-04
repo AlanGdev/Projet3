@@ -1,6 +1,6 @@
-.hidden{
+/*.hidden{
 	display: none !important;
-}
+}*/
 
 #modale{
 	position: fixed;
@@ -229,7 +229,8 @@
     font-weight: 500;
     margin-top: 20px;
 }
-.image-for-upload{
+
+#photo-preview{
     height: 100%;
     object-fit: cover;
     position: absolute;

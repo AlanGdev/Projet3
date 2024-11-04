@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" href="./assets/modale.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-	<script type="module" src="script.js" defer></script>
+	<script type="module" src="script.js"></script>
 
 </head>
 <body>
@@ -80,8 +80,8 @@
 		</nav>
 	</footer>
 </div>
-<aside id="modale" aria-hidden="true" role="dialog" aria-labelledby="Galerie photo" class="hidden">
-	<div class="modal-wrapper">
+<div id="modale" aria-hidden="true" role="dialog" aria-labelledby="modify-modal" class="hidden">
+	<div class="modal-wrapper" id="modify-modal">
 		<div class="galerie-photo contenu-modale">
 			<div class="en-tete">
 				<div class="icon-buttons">
@@ -128,11 +128,11 @@
 				<div class="content">
 					<p id="picture-error" class="hidden">Format de fichier ou taille invalide</p>
 					<div class="cadre-photo">
-						<img src="" alt="" id="photo-preview">
+						<img src="DefaultPhotoPreview.png" alt="Preview" id="photo-preview" class="hidden">
 						<i class="fa-regular fa-image"></i>
 						<div class="ajouter-photo">
 							<label for="input-photo" class="ajout">+ Ajouter photo</label>
-							<input type="file" src="" alt="" id="input-photo" required>
+							<input type="file" id="input-photo" required>
 						</div>
 						<p class="format">jpg, png: 4mo max</p>
 					</div>
@@ -141,7 +141,7 @@
 					<label for="category-selector">Catégorie</label>
 					<div class="select-container">
 						<select name="category" id="category-selector" required>
-							<option value="" selected></option>
+							<option value="" selected>-- Sélectionnez une catégorie --</option>
 						</select>
 						<i class="fa-solid fa-chevron-down"></i>
 					</div>
@@ -157,7 +157,7 @@
 
 		</div>
 	</div>
-</aside>
+</div>
 
 </body>
 </html>
