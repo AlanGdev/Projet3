@@ -91,13 +91,13 @@ fonction.afficherProjets(projects)
 
 if (!token){
    // Ouverture de la page en mode consultation
-   editionMode.classList.add("hidden")
-   modifier.classList.add("hidden")
+   editionMode.classList.add("hidden")//
+   modifier.classList.add("hidden")//
 
    // Création des boutons de filtre + gestionnaire d'évènements
    fonction.createBtnFilterTous()
    console.log("Création des boutons filtre de chaque catégorie")
-   categories.forEach(categorie=>{
+   categories.forEach(categorie=>{//
       fonction.createBtnFilter(categorie)
    })
    fonction.addEventListenerButtonFilter(projects)
@@ -105,10 +105,10 @@ if (!token){
 
 else{
    //Ouverture de la page en mode edition
-   editionMode.classList.remove("hidden")
+   editionMode.classList.remove("hidden")//
    header.classList.add("marge-top-110")
    modifier.classList.remove("hidden")
-   filters.classList.add("hidden")
+   filters.classList.add("hidden")//
    log.innerText="logout"
    log.setAttribute("href","index.html")
    log.addEventListener("click",()=>{

@@ -55,7 +55,84 @@
 		<div class="gallery">
 		</div>
 	</section>
-
+	<aside id="modale" aria-hidden="true" role="dialog" aria-labelledby="modify-modal" class="hidden">
+		<div class="modal-wrapper" id="modify-modal">
+			<div class="galerie-photo contenu-modale">
+				<div class="en-tete">
+					<div class="icon-buttons">
+						<div>
+							<button class="modal-btn-arrow hidden">
+								<i class="fa-solid fa-arrow-left"></i>
+							</button>
+						</div>
+						<div>
+							<button class="modale-btn-close">
+								<i class="fa-solid fa-xmark"></i>
+							</button>
+						</div>
+					</div>
+					<h1>Galerie photo</h1>
+				</div>
+				<div class="content">
+				</div>
+				<div class="modal-footer">
+					<div class="commande">
+						<button class="add-button" type="button">
+							Ajouter une photo
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="ajout-photo contenu-modale hidden">
+				<div class="en-tete">
+					<div class="icon-buttons">
+						<div>
+							<button class="modal-btn-arrow">
+								<i class="fa-solid fa-arrow-left"></i>
+							</button>
+						</div>
+						<div>
+							<button class="modale-btn-close">
+								<i class="fa-solid fa-xmark"></i>
+							</button>
+						</div>
+					</div>
+					<h1>Ajout photo</h1>
+				</div>
+				<form action="#">
+					<div class="content">
+						<p id="picture-error" class="hidden">Format de fichier ou taille invalide</p>
+						<div class="cadre-photo">
+							<img src="DefaultPhotoPreview.png" alt="Preview" id="photo-preview" class="hidden">
+							<i class="fa-regular fa-image"></i>
+							<div class="ajouter-photo">
+								<label for="input-photo" class="ajout">+ Ajouter photo</label>
+								<input type="file" id="input-photo" required>
+							</div>
+							<p class="format">jpg, png: 4mo max</p>
+						</div>
+						<label for="title-form">Titre</label>
+						<input type="text" name="title" id="title-form" required>
+						<label for="category-selector">Catégorie</label>
+						<div class="select-container">
+							<select name="category" id="category-selector" required>
+								<option value="" selected>-- Sélectionnez une catégorie --</option>
+							</select>
+							<i class="fa-solid fa-chevron-down"></i>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="commande">
+							<button class="validate-button" type="submit" id="submit-btn-modale">
+								Valider
+							</button>
+						</div>
+					</div>
+				</form>
+	
+			</div>
+		</div>
+	</aside>
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
@@ -79,84 +156,6 @@
 			</ul>
 		</nav>
 	</footer>
-</div>
-<div id="modale" aria-hidden="true" role="dialog" aria-labelledby="modify-modal" class="hidden">
-	<div class="modal-wrapper" id="modify-modal">
-		<div class="galerie-photo contenu-modale">
-			<div class="en-tete">
-				<div class="icon-buttons">
-					<div>
-						<button class="modal-btn-arrow hidden">
-							<i class="fa-solid fa-arrow-left"></i>
-						</button>
-					</div>
-					<div>
-						<button class="modale-btn-close">
-							<i class="fa-solid fa-xmark"></i>
-						</button>
-					</div>
-				</div>
-				<h1>Galerie photo</h1>
-			</div>
-			<div class="content">
-			</div>
-			<div class="modal-footer">
-				<div class="commande">
-					<button class="add-button" type="button">
-						Ajouter une photo
-					</button>
-				</div>
-			</div>
-		</div>
-		<div class="ajout-photo contenu-modale hidden">
-			<div class="en-tete">
-				<div class="icon-buttons">
-					<div>
-						<button class="modal-btn-arrow">
-							<i class="fa-solid fa-arrow-left"></i>
-						</button>
-					</div>
-					<div>
-						<button class="modale-btn-close">
-							<i class="fa-solid fa-xmark"></i>
-						</button>
-					</div>
-				</div>
-				<h1>Ajout photo</h1>
-			</div>
-			<form action="#">
-				<div class="content">
-					<p id="picture-error" class="hidden">Format de fichier ou taille invalide</p>
-					<div class="cadre-photo">
-						<img src="DefaultPhotoPreview.png" alt="Preview" id="photo-preview" class="hidden">
-						<i class="fa-regular fa-image"></i>
-						<div class="ajouter-photo">
-							<label for="input-photo" class="ajout">+ Ajouter photo</label>
-							<input type="file" id="input-photo" required>
-						</div>
-						<p class="format">jpg, png: 4mo max</p>
-					</div>
-					<label for="title-form">Titre</label>
-					<input type="text" name="title" id="title-form" required>
-					<label for="category-selector">Catégorie</label>
-					<div class="select-container">
-						<select name="category" id="category-selector" required>
-							<option value="" selected>-- Sélectionnez une catégorie --</option>
-						</select>
-						<i class="fa-solid fa-chevron-down"></i>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<div class="commande">
-						<button class="validate-button" type="submit" id="submit-btn-modale">
-							Valider
-						</button>
-					</div>
-				</div>
-			</form>
-
-		</div>
-	</div>
 </div>
 
 </body>

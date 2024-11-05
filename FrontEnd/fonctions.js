@@ -10,7 +10,7 @@ export function effacerContenuBalise(balise){
     balise.innerHTML=''
 }
 
-export function getToken(){
+export function getToken(){//
     const token=localStorage.getItem("token")
     console.log(`Récup. token: ${token}`)
 
@@ -19,7 +19,7 @@ export function getToken(){
 
 /*****Fonctions page principale */
 
-export function afficherProjets(projets){
+export function afficherProjets(projets){//
     //affichage projets dans la classe .gallery
     console.log("Affichage Portfolio")
 
@@ -53,7 +53,7 @@ export function createBtnFilterTous(){
     `
 }
 
-export function createBtnFilter(categorie){
+export function createBtnFilter(categorie){//
     // Création d'un bouton filtre catégorie
     const filters=document.getElementById("filters")
     const btn=document.createElement("button")
@@ -64,7 +64,7 @@ export function createBtnFilter(categorie){
     filters.appendChild(btn)
 }
 
-export function addEventListenerButtonFilter(projets){
+export function addEventListenerButtonFilter(projets){//
     // Gestionnaire d'évenement pour affichage projets par catégorie
     console.log("Ajout eventListener boutons filtres")
 
@@ -104,12 +104,12 @@ export function addEventListenerButtonFilter(projets){
 
 /*****Fonctions Modale - Galerie Photo */
 
-export async function showGaleriePhotoModale(modale){
+export async function showGaleriePhotoModale(modale){//
     console.log("Modale mode Galerie Photos")
 
     //Modale - Mode Galerie Photo
     const content=modale.querySelector(".content")
-    const projects=await getProjects()
+    const projects=await getProjects()//
 
     effacerContenuBalise(content)
 
@@ -118,7 +118,7 @@ export async function showGaleriePhotoModale(modale){
         figure.innerHTML=`
         <img src=${projet.imageUrl} alt=${projet.title} data-id=${projet.id}>
         <button type="button" class="poub" data-id=${projet.id}><i class="fa-solid fa-trash-can"></i></button>
-        `
+        `//
         figure.setAttribute("data-figNumber",`${projet.id}`)
         content.appendChild(figure)
     })
@@ -126,7 +126,7 @@ export async function showGaleriePhotoModale(modale){
     addEventListenerTrashButton(modale)
 }
 
-function addEventListenerTrashButton(modale){
+function addEventListenerTrashButton(modale){//
     // Modale: Ajout d'un gestionnaire d'evt sur chaque photo de la galerie
     const buttons=modale.querySelectorAll(".poub")
 
@@ -137,18 +137,18 @@ function addEventListenerTrashButton(modale){
     })
 }
 
-async function trashPhoto(buttonDataId,modale){
+async function trashPhoto(buttonDataId,modale){//
     //Supprime la photo de l'API et de la modale
     console.log("suppression photo de bdd et galerie modale")
 
-    const token=getToken()
+    const token=getToken()//
     console.log("Envoi requête DELETE")
     const respTrash=await fetch(`http://localhost:5678/api/works/${buttonDataId}`,{
         method:"DELETE",
         headers:{"Authorization":`Bearer ${token}`},
     })
 
-    if (respTrash.ok){
+    if (respTrash.ok){//
         const figure=modale.querySelector(`[data-figNumber="${buttonDataId}"]`)
         figure.remove()
         trashPhotoProjets(buttonDataId)
