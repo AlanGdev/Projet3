@@ -89,7 +89,7 @@ const showAddPhotoMode=(e)=>{
 
 fonction.afficherProjets(projects)
 
-if (!token){
+if (!token){// Mode visualisation
    // Ouverture de la page en mode consultation
    editionMode.classList.add("hidden")//
    modifier.classList.add("hidden")//
@@ -103,7 +103,7 @@ if (!token){
    fonction.addEventListenerButtonFilter(projects)
 }
 
-else{
+else{// Mode Edition
    //Ouverture de la page en mode edition
    editionMode.classList.remove("hidden")//
    header.classList.add("marge-top-110")

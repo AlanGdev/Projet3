@@ -7,7 +7,7 @@ async function getProjects() {
 }
 
 export function effacerContenuBalise(balise){
-    balise.innerHTML=''
+    balise.innerHTML=''//
 }
 
 export function getToken(){//
@@ -23,14 +23,14 @@ export function afficherProjets(projets){//
     //affichage projets dans la classe .gallery
     console.log("Affichage Portfolio")
 
-    const gallery=document.querySelector(".gallery")
+    const gallery=document.querySelector(".gallery")//
 
     projets.forEach(item=>{
         let figureBal=document.createElement('figure')
         figureBal.innerHTML=`
             <img src=${item.imageUrl} alt=${item.title}>
             <figcaption>${item.title}</figcaption>
-            `
+            `//
         figureBal.setAttribute("data-figNumber",`${item.id}`)//
         gallery.appendChild(figureBal)
     })
@@ -58,8 +58,8 @@ export function createBtnFilter(categorie){//
     const filters=document.getElementById("filters")
     const btn=document.createElement("button")
 
-    btn.setAttribute("data-id",`${categorie.id}`)
-    btn.innerText=`${categorie.name}`
+    btn.setAttribute("data-id",`${categorie.id}`)//
+    btn.innerText=`${categorie.name}`//
     defineClassFilterBtn(btn,"filter-btn")
     filters.appendChild(btn)
 }
@@ -72,7 +72,7 @@ export function addEventListenerButtonFilter(projets){//
     const filters=filtersbal.querySelectorAll("button")
     const gallery=document.querySelector(".gallery")
 
-    filters.forEach(filterbtn=>
+    filters.forEach(filterbtn=>//
         filterbtn.addEventListener("click",()=>{
             //Passage de cliqué en non cliqué sur ancien bouton
             filters.forEach(filter=>{
@@ -81,23 +81,23 @@ export function addEventListenerButtonFilter(projets){//
                 }
             })
             //Passage en cliqué sur bouton actuel
-            defineClassFilterBtn(filterbtn,"filter-btn-clicked")
+            defineClassFilterBtn(filterbtn,"filter-btn-clicked")//
             // Enregistrement de l'Id de la catégorie
-            let id=filterbtn.dataset.id
+            let id=filterbtn.dataset.id//
             // Création liste projets filtrés
             const filteredProjects=(()=>{
                 if(id!=="Tous"){
-                    return projets.filter((projet)=>{
-                        return projet.category.id===Number(id)
+                    return projets.filter((projet)=>{//
+                        return projet.category.id===Number(id)//
                     })
                 }
                 else{
-                    return[...projets]
+                    return[...projets]//
                 }
             })()
 
-            effacerContenuBalise(gallery)
-            afficherProjets(filteredProjects,gallery)
+            effacerContenuBalise(gallery)//
+            afficherProjets(filteredProjects)//
         })
     )
 }
@@ -145,13 +145,13 @@ async function trashPhoto(buttonDataId,modale){//
     console.log("Envoi requête DELETE")
     const respTrash=await fetch(`http://localhost:5678/api/works/${buttonDataId}`,{
         method:"DELETE",
-        headers:{"Authorization":`Bearer ${token}`},
+        headers:{"Authorization":`Bearer ${token}`},//
     })
 
     if (respTrash.ok){//
-        const figure=modale.querySelector(`[data-figNumber="${buttonDataId}"]`)
-        figure.remove()
-        trashPhotoProjets(buttonDataId)
+        const figure=modale.querySelector(`[data-figNumber="${buttonDataId}"]`)//
+        figure.remove()//
+        trashPhotoProjets(buttonDataId)//
     }
 }
 
@@ -160,8 +160,8 @@ function trashPhotoProjets(projectId){
     console.log("Suppression photo du Portfolio")
 
     const portfolio=document.querySelector(".gallery")
-    const figure=portfolio.querySelector(`[data-figNumber="${projectId}"]`)
-    figure.remove() 
+    const figure=portfolio.querySelector(`[data-figNumber="${projectId}"]`)//
+    figure.remove()// 
 }
 
 export function hideModalAddMode(modale){
@@ -303,12 +303,12 @@ function fieldsVerification(){
 }
 
 export async function submitPictureForm(e,closeModal){
-    e.preventDefault()
+    e.preventDefault()//
 
     const inputFile=document.getElementById("input-photo").files[0]
     const inputTitle=document.getElementById("title-form").value
     const categorySelector=document.getElementById("category-selector").value
-    const submitInfos=new FormData()
+    const submitInfos=new FormData()//
 
     submitInfos.append("image",inputFile)
     submitInfos.append("title",inputTitle)
@@ -316,21 +316,21 @@ export async function submitPictureForm(e,closeModal){
 
     console.log(submitInfos)
 
-    const token=getToken()
-    const response=await fetch("http://localhost:5678/api/works",{
+    const token=getToken()//
+    const response=await fetch("http://localhost:5678/api/works",{//
         method:"POST",
         headers:{
             "Authorization":`Bearer ${token}`,
             },
-        body:submitInfos
+        body:submitInfos//
     })
 
     console.log(response.status)
 
-    const projects= await getProjects()
+    const projects= await getProjects()//
     const gallery=document.querySelector(".gallery")
 
-    effacerContenuBalise(gallery)
-    afficherProjets(projects)
-    closeModal() 
+    effacerContenuBalise(gallery)//
+    afficherProjets(projects)//
+    closeModal()// 
 }
