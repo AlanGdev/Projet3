@@ -100,14 +100,14 @@ if (!token){// Mode visualisation
    categories.forEach(categorie=>{//
       fonction.createBtnFilter(categorie)
    })
-   fonction.addEventListenerButtonFilter(projects)
+   fonction.addEventListenerButtonFilter(projects)//
 }
 
 else{// Mode Edition
    //Ouverture de la page en mode edition
    editionMode.classList.remove("hidden")//
    header.classList.add("marge-top-110")
-   modifier.classList.remove("hidden")
+   modifier.classList.remove("hidden")//
    filters.classList.add("hidden")//
    log.innerText="logout"
    log.setAttribute("href","index.html")

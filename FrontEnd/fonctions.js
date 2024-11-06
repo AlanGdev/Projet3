@@ -56,7 +56,7 @@ export function createBtnFilterTous(){
 export function createBtnFilter(categorie){//
     // Création d'un bouton filtre catégorie
     const filters=document.getElementById("filters")
-    const btn=document.createElement("button")
+    const btn=document.createElement("button")//
 
     btn.setAttribute("data-id",`${categorie.id}`)//
     btn.innerText=`${categorie.name}`//
